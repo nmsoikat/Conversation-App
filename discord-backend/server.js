@@ -39,5 +39,3 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log("DB connection fail. Server not started");
     console.log(err);
   })
-
-

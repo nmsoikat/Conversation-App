@@ -3,7 +3,7 @@ const router = express.Router()
 const authController = require('../controllers/authController')
 const joi = require('joi')
 const expressJoiValidator = require('express-joi-validation').createValidator({}) //empty configuration option
-
+const {protect} = require("../middlewares/Auth")
 
 //create validation schema using joi
 const registerValidationSchema = joi.object({
@@ -20,8 +20,12 @@ const loginValidationSchema = joi.object({
 
 
 
-router.route('/register').post(expressJoiValidator.body(registerValidationSchema), authController.postLogin.login)
+router.route('/register').post(expressJoiValidator.body(registerValidationSchema), authController.postRegister.register)
 
-router.route('/login').post(expressJoiValidator.body(loginValidationSchema), authController.postRegister.register)
+router.route('/login').post(expressJoiValidator.body(loginValidationSchema), authController.postLogin.login)
+
+router.route('/admin').get(protect, (req, res) => {
+  res.send("success")
+})
 
 module.exports = router
