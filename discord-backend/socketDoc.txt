@@ -1,0 +1,13 @@
+client:
+----------------------
+socket.emit() //send
+socket.on() //receive
+
+
+server
+-------------------------------
+io.on('connection', (socket) => {
+    socket.on() //receive
+    io.emit() //send
+})
+
