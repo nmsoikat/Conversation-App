@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { connectWithSocketServer } from '../../realtimeCommunication/socketConnection';
 import AuthBox from '../../shared/components/AuthBox'
 import { validateLoginForm } from '../../shared/utils/validators';
+import { getActions } from '../../store/actions/authActions';
+import { connect } from "react-redux";
 import LoginPageFooter from './LoginPageFooter';
 import LoginPageHeader from './LoginPageHeader'
 import LoginPageInputs from './LoginPageInputs';
@@ -26,6 +29,16 @@ function LoginPage({ login }) {
     login(userDetails, navigate);
   };
 
+  // const handleLogin = () => {
+  //   const userDetails = {
+  //     mail,
+  //     password,
+  //   };
+
+  //   // login(userDetails, navigate);
+  //   connectWithSocketServer()
+  // };
+
   return (
     <AuthBox>
       <LoginPageHeader />
@@ -40,4 +53,10 @@ function LoginPage({ login }) {
   )
 }
 
-export default LoginPage
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(LoginPage);

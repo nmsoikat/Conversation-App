@@ -28,5 +28,6 @@ const registerSocketServerV2 = (server) => {
 }
 
 module.exports = {
-  registerSocketServer
+  // registerSocketServer,
+  registerSocketServer: registerSocketServerV2
 }
