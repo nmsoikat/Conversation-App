@@ -4,10 +4,10 @@ const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, mail, password } = req.body;
 
     //if user already exist
-    const userExist = await User.exists({ email: email.toLowerCase() })
+    const userExist = await User.exists({ mail: mail.toLowerCase() })
 
     if (userExist) {
       return res.status(409).send("E-mail already in user.")
@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
     //create user
     const user = await User.create({
       username,
-      email: email.toLowerCase(),
+      mail: mail.toLowerCase(),
       password: bcryptPassword
     })
 
@@ -28,7 +28,7 @@ exports.register = async (req, res, next) => {
     const token = jwt.sign(
       {
         userId: user._id,
-        email: user.email
+        mail: user.mail
       },
       process.env.JWT_SECRET,
       {
@@ -38,10 +38,10 @@ exports.register = async (req, res, next) => {
 
     res.status(201).json({
       isSuccess: true,
-      data: {
-        email: user.email,
+      userDetails: {
+        mail: user.mail,
+        token: token,
         username: user.username,
-        token
       },
       message: "User register success"
     })

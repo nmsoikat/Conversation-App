@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { mail, password } = req.body;
 
     //find user
-    const user = await User.findOne({ email: email.toLowerCase() })
+    const user = await User.findOne({ mail: mail.toLowerCase() })
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // login
@@ -15,7 +15,7 @@ exports.login = async (req, res, next) => {
       const token = jwt.sign(
         {
           userId: user._id,
-          email: user.email
+          mail: user.mail
         },
         process.env.JWT_SECRET,
         {
@@ -25,10 +25,10 @@ exports.login = async (req, res, next) => {
 
       return res.status(201).json({
         isSuccess: true,
-        data: {
-          email: user.email,
+        userDetails: {
+          mail: user.mail,
+          token: token,
           username: user.username,
-          token
         },
         message: "User register success"
       })
