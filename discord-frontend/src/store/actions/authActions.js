@@ -32,7 +32,7 @@ const login = (userDetails, navigate) => {
       localStorage.setItem("user", JSON.stringify(userDetails));
 
       dispatch(setUserDetails(userDetails));
-      navigate("dashboard");
+      navigate("/dashboard");
     }
   };
 };

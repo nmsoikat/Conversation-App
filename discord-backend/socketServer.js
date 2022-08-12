@@ -15,6 +15,8 @@
 
 const { Server } = require('socket.io');
 const protectSocket = require('./middlewares/AuthSocket');
+const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
+const disconnectHandler = require('./socketHandlers/disconnectHandler');
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -33,6 +35,12 @@ const registerSocketServerV2 = (server) => {
     console.log(socket.id);
 
     //new connection handler, which is responsible for save the information at server
+    newConnectionHandler(socket, io)
+
+    //user lost the connection
+    socket.on('disconnect', () => {
+      disconnectHandler(socket)
+    })
   })
 }
 

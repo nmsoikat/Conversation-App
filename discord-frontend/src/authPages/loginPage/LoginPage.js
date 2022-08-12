@@ -29,16 +29,6 @@ function LoginPage({ login }) {
     login(userDetails, navigate);
   };
 
-  // const handleLogin = () => {
-  //   const userDetails = {
-  //     mail,
-  //     password,
-  //   };
-
-  //   // login(userDetails, navigate);
-  //   connectWithSocketServer()
-  // };
-
   return (
     <AuthBox>
       <LoginPageHeader />
