@@ -17,6 +17,7 @@ const { Server } = require('socket.io');
 const protectSocket = require('./middlewares/AuthSocket');
 const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 const disconnectHandler = require('./socketHandlers/disconnectHandler');
+const socketServerStore = require('./socketServerStore');
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -25,6 +26,9 @@ const registerSocketServerV2 = (server) => {
       methods: ["GET", "POST"]
     }
   })
+
+  //pass the io instance
+  socketServerStore.setSocketServerInstance(io)
 
   io.use((socket, next) => {
     protectSocket(socket, next);

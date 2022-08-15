@@ -1,4 +1,4 @@
-import {openAlertMessage} from './alertActions'
+import { openAlertMessage } from './alertActions'
 import * as api from '../../api'
 
 export const friendsActions = {
@@ -15,14 +15,21 @@ export const getActions = (dispatch) => {
   }
 }
 
+export const setPendingFriendsInvitation = (pendingInvitations) => {
+  return {
+    type: friendsActions.SET_PENDING_FRIENDS_INVITATIONS,
+    pendingFriendsInvitations: pendingInvitations
+
+  }
+}
 
 const sendFriendInvitation = (data, closeDialogHandler) => {
   return async (dispatch) => {
     const response = await api.sendFriendInvitation(data)
 
-    if(response.error){
+    if (response.error) {
       dispatch(openAlertMessage(response.exception?.response?.data))
-    }else{
+    } else {
       dispatch(openAlertMessage("Invitation has been sent"))
       closeDialogHandler()
     }
