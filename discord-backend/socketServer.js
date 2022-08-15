@@ -31,8 +31,8 @@ const registerSocketServerV2 = (server) => {
   })
 
   io.on("connection", (socket) => {
-    console.log("A user is connected");
-    console.log(socket.id);
+    // console.log("A user is connected");
+    // console.log(socket.id);
 
     //new connection handler, which is responsible for save the information at server
     newConnectionHandler(socket, io)
