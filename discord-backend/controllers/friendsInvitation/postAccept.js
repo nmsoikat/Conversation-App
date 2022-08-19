@@ -9,7 +9,7 @@ const postAccept = async (req, res) => {
     const invitation = await FriendInvitation.findById(id);
 
     if (!invitation) {
-      return res.status(401).send("Error occured. Please try again");
+      return res.status(401).send("Error occurred. Please try again");
     }
 
     const { senderId, receiverId } = invitation;
@@ -28,13 +28,13 @@ const postAccept = async (req, res) => {
     await FriendInvitation.findByIdAndDelete(id);
 
     // update list of the friends if the users are online
-    friendsUpdates.updateFriends(senderId.toString());
-    friendsUpdates.updateFriends(receiverId.toString());
+    friendsUpdates.updateFriendsList(senderId.toString());
+    friendsUpdates.updateFriendsList(receiverId.toString());
 
     // update list of friends pending invitations
-    friendsUpdates.updateFriendsPendingInvitations(receiverId.toString());
+    friendsUpdates.updateFriendsPendingInvitation(receiverId.toString());
 
-    return res.status(200).send("Friend successfuly added");
+    return res.status(200).send("Friend successfully added");
   } catch (err) {
     console.log(err);
     return res.status(500).send("Something went wrong. Please try again");

@@ -24,6 +24,36 @@ const updateFriendsPendingInvitation = async (userId) => {
   }
 }
 
+const updateFriendsList = async (userId) => {
+  try {
+    //find all active connections of specific usersId //same user multiple loggedIn
+    const receiverList = socketServerStore.getActiveConnections(userId)
+
+    if (receiverList.length) {
+      const user = await User.findById(userId, { _id: 1, friends: 1 }).populate("friends", "_id username mail")
+
+      if (user) {
+        const friendsList = user.friends.map(friend => ({
+          id: friend._id,
+          mail: friend.mail,
+          username: friend.username,
+        }))
+
+        const io = socketServerStore.getSocketServerInstance()
+
+        receiverList.forEach((receiverSocketId) => {
+          io.to(receiverSocketId).emit("friends-list", {
+            friends: friendsList.length ? friendsList : []
+          })
+        })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
-  updateFriendsPendingInvitation
+  updateFriendsPendingInvitation,
+  updateFriendsList
 }
