@@ -36,10 +36,22 @@ const getActiveConnections = (userId) => {
   return activeConnections
 }
 
+//online users
+const getOnlineUsers = () => {
+  const onlineUsers = []
+
+  connectedUsers.forEach((value, key) => {
+    onlineUsers.push({ socketId: key, userId: value.userId })
+  })
+
+  return onlineUsers;
+}
+
 module.exports = {
   addNewConnectedUser,
   removeDisconnectedUser,
   getActiveConnections,
   setSocketServerInstance,
-  getSocketServerInstance
+  getSocketServerInstance,
+  getOnlineUsers
 }

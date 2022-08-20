@@ -34,6 +34,11 @@ const registerSocketServerV2 = (server) => {
     protectSocket(socket, next);
   })
 
+  const emitOnlineUsers = () => {
+    const onlineUsers = socketServerStore.getOnlineUsers();
+    io.emit("online-users", {onlineUsers})
+  }
+
   io.on("connection", (socket) => {
     // console.log("A user is connected");
     // console.log(socket.id);
@@ -41,11 +46,17 @@ const registerSocketServerV2 = (server) => {
     //new connection handler, which is responsible for save the information at server
     newConnectionHandler(socket, io)
 
+    emitOnlineUsers()
+
     //user lost the connection
     socket.on('disconnect', () => {
       disconnectHandler(socket)
     })
   })
+
+  setInterval(() => {
+    emitOnlineUsers()
+  }, 1000 * 8)
 }
 
 module.exports = {

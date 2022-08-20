@@ -21,7 +21,6 @@ export const setPendingFriendsInvitation = (pendingInvitations) => {
   return {
     type: friendsActions.SET_PENDING_FRIENDS_INVITATIONS,
     pendingFriendsInvitations: pendingInvitations
-
   }
 }
 
@@ -29,6 +28,13 @@ export const setFriends = (friends) => {
   return {
     type: friendsActions.SET_FRIENDS,
     friends
+  }
+}
+
+export const setOnlineUsers = (onlineUsers) => {
+  return{
+    type: friendsActions.SET_ONLINE_USERS,
+    onlineUsers
   }
 }
 
