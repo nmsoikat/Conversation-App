@@ -33,5 +33,9 @@ export const connectWithSocketServer = (userDetails) => {
   })
 }
 
+export const sendDirectMessage = (data) => {
+  socket.emit("direct-message", data)
+}
+
 
 //connectWithSocketServer //call this function when login complete

@@ -4,6 +4,7 @@ const DUMMY_MESSAGES = [
     content: "hello",
     sameAuthor: false,
     author: {
+      _id: 1,
       username: "Marek",
     },
     date: "22/01/2022",
@@ -14,6 +15,7 @@ const DUMMY_MESSAGES = [
     content: "hello once again",
     sameAuthor: true,
     author: {
+      _id: 1,
       username: "Marek",
     },
     date: "22/01/2022",
@@ -24,6 +26,7 @@ const DUMMY_MESSAGES = [
     content: "hello third time",
     sameAuthor: true,
     author: {
+      _id: 1,
       username: "Marek",
     },
     date: "23/01/2022",
@@ -34,6 +37,7 @@ const DUMMY_MESSAGES = [
     content: "hello response first time",
     sameAuthor: false,
     author: {
+      _id: 2,
       username: "John",
     },
     date: "23/01/2022",
@@ -44,6 +48,7 @@ const DUMMY_MESSAGES = [
     content: "hello response third time",
     sameAuthor: true,
     author: {
+      _id: 2,
       username: "John",
     },
     date: "24/01/2022",
