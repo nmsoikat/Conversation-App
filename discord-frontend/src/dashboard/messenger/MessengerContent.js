@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { styled } from "@mui/system";
 import Messages from "./messages/Messages";
-// import NewMessageInput from "./NewMessageInput";
+import NewMessageInput from "./NewMessageInput";
 // import { getDirectChatHistory } from "../../realtimeCommunication/socketConnection";
 
 const Wrapper = styled("div")({
@@ -18,7 +18,7 @@ const MessengerContent = ({ chosenChatDetails }) => {
   return (
     <Wrapper>
       <Messages />
-      {/* <NewMessageInput /> */}
+      <NewMessageInput />
     </Wrapper>
   );
 };

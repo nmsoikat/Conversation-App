@@ -15,9 +15,10 @@
 
 const { Server } = require('socket.io');
 const protectSocket = require('./middlewares/AuthSocket');
+const socketServerStore = require('./socketServerStore');
 const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 const disconnectHandler = require('./socketHandlers/disconnectHandler');
-const socketServerStore = require('./socketServerStore');
+const directMessageHandler = require('./socketHandlers/directMessageHandler')
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -47,6 +48,12 @@ const registerSocketServerV2 = (server) => {
     newConnectionHandler(socket, io)
 
     emitOnlineUsers()
+
+
+    //direct message
+    socket.on("direct-message", (data) => {
+      directMessageHandler(socket, data)
+    })
 
     //user lost the connection
     socket.on('disconnect', () => {
