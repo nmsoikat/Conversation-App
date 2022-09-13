@@ -18,7 +18,8 @@ const protectSocket = require('./middlewares/AuthSocket');
 const socketServerStore = require('./socketServerStore');
 const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 const disconnectHandler = require('./socketHandlers/disconnectHandler');
-const directMessageHandler = require('./socketHandlers/directMessageHandler')
+const directMessageHandler = require('./socketHandlers/directMessageHandler');
+const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHandler');
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -53,6 +54,11 @@ const registerSocketServerV2 = (server) => {
     //direct message
     socket.on("direct-message", (data) => {
       directMessageHandler(socket, data)
+    })
+
+    //load direct message history
+    socket.on('direct-chat-history', (data) => {
+      directChatHistoryHandler(socket, data)
     })
 
     //user lost the connection

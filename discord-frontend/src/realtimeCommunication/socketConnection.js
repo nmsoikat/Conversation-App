@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import { updateDirectChatHistoryIfActive } from '../shared/utils/chat';
 import { setPendingFriendsInvitation, setFriends, setOnlineUsers } from '../store/actions/friendsActions';
 import store from '../store/store'
 
@@ -31,11 +32,21 @@ export const connectWithSocketServer = (userDetails) => {
     const {onlineUsers} = data
     store.dispatch(setOnlineUsers(onlineUsers))
   })
+
+  socket.on("direct-chat-history", (data) => {
+    //direct chat history came from server
+    console.log('direct chat history data',data);
+    updateDirectChatHistoryIfActive(data)
+  })
 }
 
 export const sendDirectMessage = (data) => {
-  socket.emit("direct-message", data)
+  socket.emit("direct-message", data);
 }
 
+export const getDirectChatHistory = (data) => {
+  //direct chat history event fire to server for get history
+  socket.emit("direct-chat-history", data);
+}
 
 //connectWithSocketServer //call this function when login complete
