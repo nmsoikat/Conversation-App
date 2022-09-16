@@ -20,7 +20,7 @@ const updateChatHistoryIfSameConversationActive = ({participants, usersInConvers
   const result = participants.every(function (participantId) {
     return usersInConversation.includes(participantId)
   })
-
+console.log('mm',messages);
   if(result){
     store.dispatch(setMessages(messages))
   }

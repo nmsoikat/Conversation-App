@@ -10,7 +10,6 @@ const Wrapper = styled("div")({
 
 const MessengerContent = ({ chosenChatDetails }) => {
   useEffect(() => {
-    //TODO
     //fetching chat history from specific user id
     getDirectChatHistory({
       receiverUserId: chosenChatDetails.id,

@@ -7,7 +7,7 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
     path: 'messages',
     model: 'Message',
     populate: {
-      path: 'authorId',
+      path: 'author',
       model: 'User',
       select: 'username _id'
     }
@@ -19,7 +19,7 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
     if (toSpecifiedSocketId) {
       // initial update of chat history
       return io.to(toSpecifiedSocketId).emit("direct-chat-history", {
-        message: conversation.messages,
+        messages: conversation.messages,
         participants: conversation.participants
       })
     }
