@@ -20,6 +20,7 @@ const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 const disconnectHandler = require('./socketHandlers/disconnectHandler');
 const directMessageHandler = require('./socketHandlers/directMessageHandler');
 const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHandler');
+const roomCreateHandler = require('./socketHandlers/roomCreateHandler');
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -59,6 +60,11 @@ const registerSocketServerV2 = (server) => {
     //load direct message history
     socket.on('direct-chat-history', (data) => {
       directChatHistoryHandler(socket, data)
+    })
+
+    //create new room
+    socket.on('room-create', () => {
+      roomCreateHandler(socket);
     })
 
     //user lost the connection

@@ -2,6 +2,7 @@ import io from 'socket.io-client'
 import { updateDirectChatHistoryIfActive } from '../shared/utils/chat';
 import { setPendingFriendsInvitation, setFriends, setOnlineUsers } from '../store/actions/friendsActions';
 import store from '../store/store'
+import * as roomHandler from './roomHandler'
 
 let socket = null;
 export const connectWithSocketServer = (userDetails) => {
@@ -24,19 +25,29 @@ export const connectWithSocketServer = (userDetails) => {
   })
 
   socket.on('friends-list', (data) => {
-    const {friends} = data;
+    const { friends } = data;
     store.dispatch(setFriends(friends))
   })
 
   socket.on('online-users', (data) => {
-    const {onlineUsers} = data
+    const { onlineUsers } = data
     store.dispatch(setOnlineUsers(onlineUsers))
   })
 
   socket.on("direct-chat-history", (data) => {
     //direct chat history came from server
-    console.log('direct chat history data',data);
+    console.log('direct chat history data', data);
     updateDirectChatHistoryIfActive(data)
+  })
+
+  socket.on("room-create", (data) => {
+    // console.log("Created room details came from the server");
+    // console.log(data);
+    roomHandler.newRoomCreated(data)
+  })
+
+  socket.on('active-rooms', data => {
+    roomHandler.updateActiveRoom(data)
   })
 }
 
@@ -47,6 +58,10 @@ export const sendDirectMessage = (data) => {
 export const getDirectChatHistory = (data) => {
   //direct chat history event fire to server for get history
   socket.emit("direct-chat-history", data);
+}
+
+export const createNewRoom = () => {
+  socket.emit("room-create")
 }
 
 //connectWithSocketServer //call this function when login complete
