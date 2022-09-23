@@ -5,7 +5,7 @@ import * as roomHandler from "../../../realtimeCommunication/roomHandler";
 
 const CloseRoomButton = () => {
   const handleLeaveRoom = () => {
-    // roomHandler.leaveRoom();
+    roomHandler.leaveRoom();
   };
 
   return (

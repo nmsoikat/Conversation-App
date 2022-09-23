@@ -50,7 +50,6 @@ const getOnlineUsers = () => {
   return onlineUsers;
 }
 
-
 //add new active room
 const addNewActiveRoom = (userId, socketId) => {
   const newActiveRoom = {
@@ -104,9 +103,31 @@ const joinActiveRoom = (roomId, newParticipantDetails) => {
   //add active room
   activeRooms.push(updatedRoom)
 
-  console.log({activeRooms});
+  console.log({ activeRooms });
 }
 
+const leaveActiveRoom = (roomId, participantSocketId) => {
+  //active room
+  const activeRoom = activeRooms.find(activeRoom => activeRoom.roomId === roomId);
+
+  if (activeRoom) {
+    const copyOfActiveRoom = { ...activeRoom }
+
+    //remove participant
+    copyOfActiveRoom.participants = copyOfActiveRoom.participants
+      .filter(participant => participant.socketId !== participantSocketId)
+
+    //remove active room
+    activeRooms = activeRooms.filter(activeRoom => activeRoom.roomId !== roomId);
+
+    //if this user is not last user of this room
+    if(copyOfActiveRoom.participants.length > 0){
+      //add updated room //one user is removed
+      activeRooms.push(copyOfActiveRoom)
+    }
+
+  }
+}
 
 module.exports = {
   addNewConnectedUser,
@@ -118,5 +139,6 @@ module.exports = {
   addNewActiveRoom,
   getActiveRooms,
   getActiveRoom,
-  joinActiveRoom
+  joinActiveRoom,
+  leaveActiveRoom
 }
