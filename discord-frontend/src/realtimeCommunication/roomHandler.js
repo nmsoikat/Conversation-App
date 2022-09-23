@@ -14,10 +14,28 @@ export const newRoomCreated = (data) => {
 }
 
 export const updateActiveRoom = (data) => {
+  //currently all active rooms came from server
   const { activeRooms } = data;
-  //new active room came from server
-  console.log('new active room came from server', activeRooms);
-  store.dispatch(setActiveRooms(activeRooms))
+  console.log('all active rooms', activeRooms);
+  //one of my friend create the room
+  const rooms = []
+  const friends = store.getState().friends.friends;
+
+  for (let room of activeRooms) {
+    for (let friend of friends) {
+      if (friend.id === room.roomCreator.userId) {
+        rooms.push({ ...room, creatorUserName: friend.username })
+      }
+    }
+  }
+
+  store.dispatch(setActiveRooms(rooms))
+}
+
+export const joinRoom = (roomId) => {
+  store.dispatch(setRoomDetails({roomId}))
+  store.dispatch(setOpenRoom(false, true))
+  socketConnection.joinRoom({roomId})
 }
 
 // export const createNewRoom = () => {

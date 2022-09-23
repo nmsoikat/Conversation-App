@@ -68,7 +68,7 @@ const addNewActiveRoom = (userId, socketId) => {
   }
 
   activeRooms = [...activeRooms, newActiveRoom]
-  
+
   console.log("New active room");
   console.log(newActiveRoom);
 
@@ -77,8 +77,36 @@ const addNewActiveRoom = (userId, socketId) => {
 
 //get active rooms
 const getActiveRooms = () => {
-  return  [...activeRooms]
+  return [...activeRooms]
 }
+
+//get active room by roomId
+const getActiveRoom = (roomId) => {
+  const activeRoom = activeRooms.find(activeRoom => activeRoom.roomId === roomId)
+
+  return { ...activeRoom };
+}
+
+//join active room
+const joinActiveRoom = (roomId, newParticipantDetails) => {
+  //active room
+  const room = activeRooms.find(activeRoom => activeRoom.roomId === roomId);
+
+  //remove active room
+  activeRooms = activeRooms.filter(activeRoom => activeRoom.roomId !== roomId);
+
+  //update participants of active room
+  const updatedRoom = {
+    ...room,
+    participants: [...room.participants, newParticipantDetails]
+  }
+
+  //add active room
+  activeRooms.push(updatedRoom)
+
+  console.log({activeRooms});
+}
+
 
 module.exports = {
   addNewConnectedUser,
@@ -88,5 +116,7 @@ module.exports = {
   getSocketServerInstance,
   getOnlineUsers,
   addNewActiveRoom,
-  getActiveRooms
+  getActiveRooms,
+  getActiveRoom,
+  joinActiveRoom
 }

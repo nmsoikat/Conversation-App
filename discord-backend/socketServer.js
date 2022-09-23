@@ -21,6 +21,7 @@ const disconnectHandler = require('./socketHandlers/disconnectHandler');
 const directMessageHandler = require('./socketHandlers/directMessageHandler');
 const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHandler');
 const roomCreateHandler = require('./socketHandlers/roomCreateHandler');
+const roomJoinHandler = require('./socketHandlers/roomJoinHandler')
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -66,6 +67,12 @@ const registerSocketServerV2 = (server) => {
     socket.on('room-create', () => {
       roomCreateHandler(socket);
     })
+
+    //user try to join in room
+    socket.on('room-join', (data) => {
+      roomJoinHandler(socket, data)
+    })
+
 
     //user lost the connection
     socket.on('disconnect', () => {

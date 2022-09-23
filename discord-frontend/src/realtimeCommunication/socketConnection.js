@@ -64,4 +64,7 @@ export const createNewRoom = () => {
   socket.emit("room-create")
 }
 
+export const joinRoom = (data) => {
+  socket.emit('room-join', data)
+}
 //connectWithSocketServer //call this function when login complete
