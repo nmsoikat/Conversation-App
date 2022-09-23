@@ -6,6 +6,12 @@ const apiClient = axios.create({
   timeout: 1000,
 });
 
+//host local ipv4
+// const apiClient = axios.create({
+//   baseURL: "http://192.168.0.108:5001/api/v1",
+//   timeout: 1000,
+// });
+
 apiClient.interceptors.request.use(
   (config) => {
     const userDetails = localStorage.getItem("user");

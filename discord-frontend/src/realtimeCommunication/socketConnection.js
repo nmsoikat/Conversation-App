@@ -14,6 +14,13 @@ export const connectWithSocketServer = (userDetails) => {
     }
   })
 
+  //host local ipv4
+  // socket = io('http://192.168.0.108:5001', {
+  //   auth: {
+  //     token: jwtToken
+  //   }
+  // })
+
   socket.on('connect', () => {
     console.log("user connected");
     console.log(socket.id);

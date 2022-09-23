@@ -1,10 +1,18 @@
-import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setOpenRoom, setRoomDetails } from "../store/actions/roomActions";
+import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setLocalStream, setOpenRoom, setRoomDetails } from "../store/actions/roomActions";
 import store from "../store/store"
 import * as socketConnection from './socketConnection'
+import * as webRTCHandler from './webRTCHandler'
 
 export const createNewRoom = () => {
-  store.dispatch(setOpenRoom(true, true));
-  socketConnection.createNewRoom();
+  //if audio/video connected
+  const successCallBack = () => {
+    store.dispatch(setOpenRoom(true, true));
+    socketConnection.createNewRoom();
+  }
+
+  const audioOnly = store.getState().room.audioOnly
+
+  webRTCHandler.getLocalStreamPreview(audioOnly, successCallBack)
 };
 
 export const newRoomCreated = (data) => {
@@ -33,16 +41,29 @@ export const updateActiveRoom = (data) => {
 }
 
 export const joinRoom = (roomId) => {
-  store.dispatch(setRoomDetails({ roomId }))
-  store.dispatch(setOpenRoom(false, true))
-  socketConnection.joinRoom({ roomId })
+  //if audio/video connected
+  const successCallBack = () => {
+    store.dispatch(setRoomDetails({ roomId }))
+    store.dispatch(setOpenRoom(false, true))
+    socketConnection.joinRoom({ roomId })
+  }
+
+  const audioOnly = store.getState().room.audioOnly
+
+  webRTCHandler.getLocalStreamPreview(audioOnly, successCallBack)
 }
 
 export const leaveRoom = () => {
   const roomId = store.getState().room.roomDetails.roomId
 
-  socketConnection.leaveRoom({roomId})
+  //stop streaming when user is leave the room
+  const localStream = store.getState().room.localStream
+  if (localStream) {
+    localStream.getTracks().forEach(track => track.stop())
+    store.dispatch(setLocalStream(null))
+  }
 
+  socketConnection.leaveRoom({ roomId })
   store.dispatch(setRoomDetails(null))
   store.dispatch(setOpenRoom(false, false))
 }
