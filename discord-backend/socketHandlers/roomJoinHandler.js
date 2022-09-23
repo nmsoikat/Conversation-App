@@ -11,9 +11,19 @@ const roomJoinHandler = (socket, data) => {
     socketId
   }
 
-  const roomDetails = socketServerStore.getActiveRoom(roomId)
+  const activeRoomDetails = socketServerStore.getActiveRoom(roomId)
 
   socketServerStore.joinActiveRoom(roomId, newParticipantDetails)
+
+  //send information to users in room that they should prepare for incoming connection
+  activeRoomDetails.participants.forEach(participant => {
+    //if already joined no need to send connection-prepare event
+    if(newParticipantDetails.socketId !== participant.socketId){
+      socket.to(participant.socketId).emit("connection-prepare", {
+        newConnectedUserSocketId: newParticipantDetails.socketId
+      })
+    }
+  });
 
   roomsUpdates.updateRooms()
 }
