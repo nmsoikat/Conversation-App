@@ -62,7 +62,7 @@ export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) 
   }
 
   peer[newConnectedUserSocketId] = new Peer({
-    initiator: isInitiator,
+    initiator: isInitiator, //if false connection will not establish // if true connection will establish
     config: getConfiguration(),
     stream: localStream
   })
@@ -76,7 +76,7 @@ export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) 
 
     //TODO:
     //pass signaling data to other user
-    // socketConnection.signalPeerData(signalPeerData)
+    //socketConnection.signalPeerData(signalPeerData)
   })
 
   peer[newConnectedUserSocketId].on('stream', (remoteStream) => {

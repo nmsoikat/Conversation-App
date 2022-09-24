@@ -23,6 +23,7 @@ const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHand
 const roomCreateHandler = require('./socketHandlers/roomCreateHandler');
 const roomJoinHandler = require('./socketHandlers/roomJoinHandler')
 const roomLeaveHandler = require('./socketHandlers/roomLeaveHandler')
+const roomInitializeConnectionHandler = require('./socketHandlers/roomInitializeConnectionHandler')
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -77,6 +78,11 @@ const registerSocketServerV2 = (server) => {
     //leave room
     socket.on('room-leave', (data) => {
       roomLeaveHandler(socket, data)
+    })
+
+    //connection initialize
+    socket.on('connection-init', (data) => {
+      roomInitializeConnectionHandler(socket, data)
     })
 
     //user lost the connection

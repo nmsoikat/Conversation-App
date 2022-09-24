@@ -60,14 +60,21 @@ export const connectWithSocketServer = (userDetails) => {
 
   socket.on('connection-prepare', data => {
     //coming form server
-    // console.log('connection prepare:', data);
+    //console.log('connection prepare:', data);
 
     const { newConnectedUserSocketId } = data
     //preparing only for incoming connection //false
     webRTCHandler.prepareNewPeerConnection(newConnectedUserSocketId, false)
 
-    //
     socket.emit('connection-init', { newConnectedUserSocketId })
+  })
+
+  socket.on('connection-init', (data) => {
+    const {newConnectedUserSocketId} = data;
+
+    //now user is prepared to establish the connection
+    //now establish a direct connection for this user//true
+    webRTCHandler.prepareNewPeerConnection(newConnectedUserSocketId, true)
   })
 }
 
