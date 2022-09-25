@@ -1,4 +1,4 @@
-import { setLocalStream } from '../store/actions/roomActions'
+import { setLocalStream, setRemoteStreams } from '../store/actions/roomActions'
 import store from '../store/store'
 import Peer from 'simple-peer'
 import * as socketConnection from './socketConnection'
@@ -69,7 +69,7 @@ export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) 
   })
 
   //necessary data which is the ICE candidate and SDP information
-  peers[newConnectedUserSocketId].on('signal',  data => {
+  peers[newConnectedUserSocketId].on('signal', data => {
     const signalData = {
       signal: data,
       newConnectedUserSocketId: newConnectedUserSocketId
@@ -82,20 +82,37 @@ export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) 
   })
 
   peers[newConnectedUserSocketId].on('stream', (remoteStream) => {
-    //TODO:
+    /////TODO:
     //add new remote stream to our server store
     console.log("Remote stream came from other user");
     console.log("Direct connection has been establish");
+
+    /*
+      if this stream will came from the other user what we like to do,
+      it will take this stream and add this information
+      from which user this stream belong.
+      that is why add "newConnectedUserSocketId" this property in "remoteStream"
+    */
+    remoteStream.newConnectedUserSocketId = newConnectedUserSocketId
+    addNewRemoteStream(remoteStream)
   })
 }
 
 export const handleSignalingData = (data) => {
-  const {newConnectedUserSocketId, signal} = data;
+  const { newConnectedUserSocketId, signal } = data;
 
   //with that logic will be able to exchange that SDP and ICE candidate information
   //between users
   //this is need to establish direct connection.
-  if(peers[newConnectedUserSocketId]){
+  if (peers[newConnectedUserSocketId]) {
     peers[newConnectedUserSocketId].signal(signal)
   }
+}
+
+const addNewRemoteStream = (remoteStream) => {
+  //render remote stream
+  const remoteStreams = store.getState().room.remoteStreams
+  const newRemoteStreams = [...remoteStreams, remoteStream]
+
+  store.dispatch(setRemoteStreams(newRemoteStreams))
 }
