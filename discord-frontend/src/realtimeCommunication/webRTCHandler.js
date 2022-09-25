@@ -1,6 +1,7 @@
 import { setLocalStream } from '../store/actions/roomActions'
 import store from '../store/store'
 import Peer from 'simple-peer'
+import * as socketConnection from './socketConnection'
 
 const getConfiguration = () => {
   const turnIceServer = null;
@@ -50,7 +51,7 @@ export const getLocalStreamPreview = (onlyAudio = false, callBackFunc) => {
     })
 }
 
-const peer = {}
+const peers = {}
 
 export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) => {
   const localStream = store.getState().room.localStream
@@ -61,26 +62,40 @@ export const prepareNewPeerConnection = (newConnectedUserSocketId, isInitiator) 
     console.log("preparing new peer connection as not initiator");
   }
 
-  peer[newConnectedUserSocketId] = new Peer({
+  peers[newConnectedUserSocketId] = new Peer({
     initiator: isInitiator, //if false connection will not establish // if true connection will establish
     config: getConfiguration(),
     stream: localStream
   })
 
   //necessary data which is the ICE candidate and SDP information
-  peer[newConnectedUserSocketId].on('signal',  data => {
+  peers[newConnectedUserSocketId].on('signal',  data => {
     const signalData = {
       signal: data,
       newConnectedUserSocketId: newConnectedUserSocketId
     }
 
-    //TODO:
+    /////TODO:
     //pass signaling data to other user
     //socketConnection.signalPeerData(signalPeerData)
+    socketConnection.signalPeerData(signalData)
   })
 
-  peer[newConnectedUserSocketId].on('stream', (remoteStream) => {
+  peers[newConnectedUserSocketId].on('stream', (remoteStream) => {
     //TODO:
     //add new remote stream to our server store
+    console.log("Remote stream came from other user");
+    console.log("Direct connection has been establish");
   })
+}
+
+export const handleSignalingData = (data) => {
+  const {newConnectedUserSocketId, signal} = data;
+
+  //with that logic will be able to exchange that SDP and ICE candidate information
+  //between users
+  //this is need to establish direct connection.
+  if(peers[newConnectedUserSocketId]){
+    peers[newConnectedUserSocketId].signal(signal)
+  }
 }

@@ -24,6 +24,8 @@ const roomCreateHandler = require('./socketHandlers/roomCreateHandler');
 const roomJoinHandler = require('./socketHandlers/roomJoinHandler')
 const roomLeaveHandler = require('./socketHandlers/roomLeaveHandler')
 const roomInitializeConnectionHandler = require('./socketHandlers/roomInitializeConnectionHandler')
+const roomSignalingDataHandler = require('./socketHandlers/roomSignalingDataHandler')
+
 
 const registerSocketServerV2 = (server) => {
   const io = new Server(server, {
@@ -83,6 +85,11 @@ const registerSocketServerV2 = (server) => {
     //connection initialize
     socket.on('connection-init', (data) => {
       roomInitializeConnectionHandler(socket, data)
+    })
+
+    //receive signal data form frontend
+    socket.on("connection-signal", data => {
+      roomSignalingDataHandler(socket, data)
     })
 
     //user lost the connection

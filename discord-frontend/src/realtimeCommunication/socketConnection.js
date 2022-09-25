@@ -73,8 +73,12 @@ export const connectWithSocketServer = (userDetails) => {
     const {newConnectedUserSocketId} = data;
 
     //now user is prepared to establish the connection
-    //now establish a direct connection for this user//true
+    //now establish a direct connection for this user //true
     webRTCHandler.prepareNewPeerConnection(newConnectedUserSocketId, true)
+  })
+
+  socket.on('connection-signal', (data) => {
+    webRTCHandler.handleSignalingData(data)
   })
 }
 
@@ -98,4 +102,10 @@ export const joinRoom = (data) => {
 export const leaveRoom = (data) => {
   socket.emit('room-leave', data)
 }
+
+//send signal data to server
+export const signalPeerData = (data) => {
+  socket.emit("connection-signal", data)
+}
+
 //connectWithSocketServer //call this function when login complete
