@@ -83,7 +83,11 @@ const getActiveRooms = () => {
 const getActiveRoom = (roomId) => {
   const activeRoom = activeRooms.find(activeRoom => activeRoom.roomId === roomId)
 
-  return { ...activeRoom };
+  if (activeRoom) {
+    return { ...activeRoom };
+  } else {
+    return null;
+  }
 }
 
 //join active room
@@ -121,7 +125,7 @@ const leaveActiveRoom = (roomId, participantSocketId) => {
     activeRooms = activeRooms.filter(activeRoom => activeRoom.roomId !== roomId);
 
     //if this user is not last user of this room
-    if(copyOfActiveRoom.participants.length > 0){
+    if (copyOfActiveRoom.participants.length > 0) {
       //add updated room //one user is removed
       activeRooms.push(copyOfActiveRoom)
     }

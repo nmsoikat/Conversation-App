@@ -1,4 +1,4 @@
-import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setLocalStream, setOpenRoom, setRoomDetails } from "../store/actions/roomActions";
+import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setLocalStream, setOpenRoom, setRemoteStreams, setRoomDetails } from "../store/actions/roomActions";
 import store from "../store/store"
 import * as socketConnection from './socketConnection'
 import * as webRTCHandler from './webRTCHandler'
@@ -63,20 +63,15 @@ export const leaveRoom = () => {
     store.dispatch(setLocalStream(null))
   }
 
+  //clear remote stream //otherwise rejoin user can see duplicate stream of him
+  store.dispatch(setRemoteStreams([]))
+  
+  //close all direct connection which user have
+  //which he has establish with other user
+  webRTCHandler.closeAllConnection();
+
+  //leave from server
   socketConnection.leaveRoom({ roomId })
   store.dispatch(setRoomDetails(null))
   store.dispatch(setOpenRoom(false, false))
 }
-
-// export const createNewRoom = () => {
-//   const successCalbackFunc = () => {
-//     store.dispatch(setOpenRoom(true, true));
-
-//     const audioOnly = store.getState().room.audioOnly;
-//     store.dispatch(setIsUserJoinedOnlyWithAudio(audioOnly));
-//     // socketConnection.createNewRoom();
-//   };
-//   successCalbackFunc();
-//   const audioOnly = store.getState().room.audioOnly;
-//   // webRTCHandler.getLocalStreamPreview(audioOnly, successCalbackFunc);
-// };

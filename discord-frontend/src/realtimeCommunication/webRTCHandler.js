@@ -116,3 +116,35 @@ const addNewRemoteStream = (remoteStream) => {
 
   store.dispatch(setRemoteStreams(newRemoteStreams))
 }
+
+//1. close all connection
+export const closeAllConnection = () => {
+  //{a:1,b:2} => [[a,1],[b,2]].forEach((arr) => {arr[0] //key //a})
+  Object.entries(peers).forEach(peer => {
+    const newConnectedUserSocketId = peer[0] //key
+    if (peers[newConnectedUserSocketId]) {
+      console.log('user destroy');
+      peers[newConnectedUserSocketId].destroy();
+      delete peers[newConnectedUserSocketId];
+    }
+  })
+}
+
+//2. close connection from other user
+export const handleParticipantLeftRoom = (data) => {
+  const { newConnectedUserSocketIdLeaved } = data;
+
+  //delete from other user
+  if (newConnectedUserSocketIdLeaved && peers[newConnectedUserSocketIdLeaved]) {
+    console.log('other user destroy');
+    peers[newConnectedUserSocketIdLeaved].destroy();
+    delete peers[newConnectedUserSocketIdLeaved];
+  }
+
+  //remove remote stream
+  const remoteStreams = store.getState().room.remoteStreams;
+  const updatedRemoteStreams = remoteStreams
+    .filter(remoteStream => remoteStream.newConnectedUserSocketId !== newConnectedUserSocketIdLeaved)
+
+  store.dispatch(setRemoteStreams(updatedRemoteStreams))
+}
