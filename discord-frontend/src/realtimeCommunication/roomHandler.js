@@ -1,4 +1,4 @@
-import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setLocalStream, setOpenRoom, setRemoteStreams, setRoomDetails } from "../store/actions/roomActions";
+import { setActiveRooms, setIsUserJoinedOnlyWithAudio, setLocalStream, setOpenRoom, setRemoteStreams, setRoomDetails, setScreenSharingStream } from "../store/actions/roomActions";
 import store from "../store/store"
 import * as socketConnection from './socketConnection'
 import * as webRTCHandler from './webRTCHandler'
@@ -61,6 +61,13 @@ export const leaveRoom = () => {
   if (localStream) {
     localStream.getTracks().forEach(track => track.stop())
     store.dispatch(setLocalStream(null))
+  }
+
+  //stop screen share streaming when user is leave the room
+  const screenSharingStream = store.getState().room.screenSharingStream;
+  if(screenSharingStream){
+    screenSharingStream.getTracks().forEach(track => track.stop())
+    store.dispatch(setScreenSharingStream(null))
   }
 
   //clear remote stream //otherwise rejoin user can see duplicate stream of him
