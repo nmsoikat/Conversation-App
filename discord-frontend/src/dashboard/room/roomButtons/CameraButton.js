@@ -7,6 +7,13 @@ const CameraButton = ({ localStream }) => {
   const [cameraEnabled, setCameraEnabled] = useState(true);
 
   const handleToggleCamera = () => {
+    /*
+      * localStream.getVideoTracks()
+      return array of video tracks
+      and our camera track always will in first place
+    */
+
+    //turn on/off our video camera
     localStream.getVideoTracks()[0].enabled = !cameraEnabled;
     setCameraEnabled(!cameraEnabled);
   };

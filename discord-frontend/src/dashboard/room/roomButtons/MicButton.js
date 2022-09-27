@@ -7,6 +7,13 @@ const MicButton = ({ localStream }) => {
   const [micEnabled, setMicEnabled] = useState(true);
 
   const handleToggleMic = () => {
+    /*
+      * localStream.getAudioTracks()
+      return array of audio tracks
+      and our microphone audio track always will in first place
+    */
+
+    //turn on/off our microphone
     localStream.getAudioTracks()[0].enabled = !micEnabled;
     setMicEnabled(!micEnabled);
   };
