@@ -7,6 +7,10 @@ export const createNewRoom = () => {
   //if audio/video connected
   const successCallBack = () => {
     store.dispatch(setOpenRoom(true, true));
+
+    const audioOnly = store.getState().room.audioOnly
+    store.dispatch(setIsUserJoinedOnlyWithAudio(audioOnly))
+
     socketConnection.createNewRoom();
   }
 
@@ -29,12 +33,20 @@ export const updateActiveRoom = (data) => {
   const rooms = []
   const friends = store.getState().friends.friends;
 
+  const userId = store.getState().auth.userDetails?._id;
+
   for (let room of activeRooms) {
-    for (let friend of friends) {
-      if (friend.id === room.roomCreator.userId) {
-        rooms.push({ ...room, creatorUserName: friend.username })
+    const isRoomCreatedByMe = room.roomCreator.userId === userId
+    if (isRoomCreatedByMe) {
+      rooms.push({ ...room, creatorUsername: "Me" })
+    } else {
+      for (let friend of friends) {
+        if (friend.id === room.roomCreator.userId) {
+          rooms.push({ ...room, creatorUsername: friend.username })
+        }
       }
     }
+
   }
 
   store.dispatch(setActiveRooms(rooms))
@@ -45,6 +57,10 @@ export const joinRoom = (roomId) => {
   const successCallBack = () => {
     store.dispatch(setRoomDetails({ roomId }))
     store.dispatch(setOpenRoom(false, true))
+
+    const audioOnly = store.getState().room.audioOnly
+    store.dispatch(setIsUserJoinedOnlyWithAudio(audioOnly))
+
     socketConnection.joinRoom({ roomId })
   }
 
@@ -65,14 +81,14 @@ export const leaveRoom = () => {
 
   //stop screen share streaming when user is leave the room
   const screenSharingStream = store.getState().room.screenSharingStream;
-  if(screenSharingStream){
+  if (screenSharingStream) {
     screenSharingStream.getTracks().forEach(track => track.stop())
     store.dispatch(setScreenSharingStream(null))
   }
 
   //clear remote stream //otherwise rejoin user can see duplicate stream of him
   store.dispatch(setRemoteStreams([]))
-  
+
   //close all direct connection which user have
   //which he has establish with other user
   webRTCHandler.closeAllConnection();
