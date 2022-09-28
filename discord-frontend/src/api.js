@@ -1,10 +1,17 @@
 import axios from "axios";
 import { logout } from "./shared/utils/auth";
 
+//live api
 const apiClient = axios.create({
-  baseURL: "http://localhost:5001/api/v1",
+  baseURL: "https://discord-clone-api.onrender.com/api/v1",
   timeout: 1000,
 });
+
+//localhost
+// const apiClient = axios.create({
+//   baseURL: "http://localhost:5001/api/v1",
+//   timeout: 1000,
+// });
 
 //host local ipv4
 // const apiClient = axios.create({

@@ -9,11 +9,19 @@ let socket = null;
 export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
 
-  socket = io('http://localhost:5001', {
+  //live
+  socket = io('https://discord-clone-api.onrender.com', {
     auth: {
       token: jwtToken
     }
   })
+
+  //localhost
+  // socket = io('http://localhost:5001', {
+  //   auth: {
+  //     token: jwtToken
+  //   }
+  // })
 
   //host local ipv4
   // socket = io('http://192.168.0.108:5001', {
