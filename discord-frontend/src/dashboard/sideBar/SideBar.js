@@ -11,11 +11,11 @@ const MainContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  backgroundColor: "#202225",
+  backgroundColor: "#2D2926FF",
+  flexShrink: 0
 });
 
 const SideBar = ({ activeRooms, isUserInRoom }) => {
-console.log(activeRooms, isUserInRoom);
   return (
     <MainContainer>
       <MainPageButton />

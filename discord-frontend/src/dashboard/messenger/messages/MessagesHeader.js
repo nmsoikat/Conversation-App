@@ -22,7 +22,7 @@ const MessagesHeader = ({ name = "" }) => {
           marginRight: "5px",
         }}
       >
-        {name}
+        {name[0].toUpperCase() + name.slice(1)}
       </Typography>
       <Typography
         sx={{

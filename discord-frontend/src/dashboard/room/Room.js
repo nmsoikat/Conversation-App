@@ -6,23 +6,25 @@ import VideosContainer from "./VideosContainer";
 
 const MainContainer = styled("div")({
   position: "absolute",
+  right: 0,
+  bottom: 0,
   borderRadius: "8px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#202225",
+  backgroundColor: "#2F3136",
 });
 
 const fullScreenRoomStyle = {
-  width: "100%",
+  width: "calc(100% - 72px)",
   height: "100vh",
 };
 
 const minimizedRoomStyle = {
   bottom: "0px",
   right: "0px",
-  width: "30%",
+  width: "50%",
   height: "40vh",
 };
 

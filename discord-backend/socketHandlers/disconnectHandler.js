@@ -12,7 +12,7 @@ const disconnectHandler = async (socket) => {
     }
   })
 
-  console.log(socket.id);
+  //console.log(socket.id);
   socketServerStore.removeDisconnectedUser(socket.id)
 }
 

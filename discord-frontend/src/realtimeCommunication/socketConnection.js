@@ -31,8 +31,8 @@ export const connectWithSocketServer = (userDetails) => {
   // })
 
   socket.on('connect', () => {
-    console.log("user connected");
-    console.log(socket.id);
+    //console.log("user connected");
+    //console.log(socket.id);
   })
 
   socket.on('friends-invitations', (data) => {
@@ -52,7 +52,7 @@ export const connectWithSocketServer = (userDetails) => {
 
   socket.on("direct-chat-history", (data) => {
     //direct chat history came from server
-    console.log('direct chat history data', data);
+    //console.log('direct chat history data', data);
     updateDirectChatHistoryIfActive(data)
   })
 

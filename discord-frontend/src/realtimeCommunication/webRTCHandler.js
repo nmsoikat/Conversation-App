@@ -39,7 +39,7 @@ export const getLocalStreamPreview = (onlyAudio = false, callBackFunc) => {
   //ask for permission
   navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
-      console.log('stream', stream);
+      //console.log('stream', stream);
       store.dispatch(setLocalStream(stream))
       //if has permission //otherwise we don't need to connect the user to webRTC
       callBackFunc()

@@ -26,8 +26,8 @@ const convertDateToHumanReadable = (date, format) => {
 };
 
 const Messages = ({ chosenChatDetails, messages }) => {
-  console.log("messages:");
-  console.log(messages);
+  //console.log("messages:");
+  //console.log(messages);
   return (
     <MainContainer>
       <MessagesHeader name={chosenChatDetails?.username} />

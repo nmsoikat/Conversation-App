@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { connect } from "react-redux"
+import { getActions } from "../../store/actions/controlBarActions"
 
-const MainPageButton = () => {
+const MainPageButton = ({ isFriendsBarVisible, toggleFriendsBar }) => {
+  const friendsBarToggler = () => {
+    toggleFriendsBar(!isFriendsBarVisible)
+  }
+
   return (
     <Button
       style={{
@@ -14,12 +20,26 @@ const MainPageButton = () => {
         minWidth: 0,
         marginTop: "10px",
         color: "white",
-        backgroundColor: "#5865F2",
+        backgroundColor: "#E94B3CFF",
+        // backgroundColor: "#5865F2",
       }}
+      onClick={friendsBarToggler}
     >
       <GroupsIcon />
     </Button>
   );
 };
 
-export default MainPageButton;
+const mapStoreStateToProps = ({ controlBar }) => {
+  return {
+    ...controlBar
+  }
+}
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch)
+  }
+}
+
+export default connect(mapStoreStateToProps, mapActionsToProps)(MainPageButton);

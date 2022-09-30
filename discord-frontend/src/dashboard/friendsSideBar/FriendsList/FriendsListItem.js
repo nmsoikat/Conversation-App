@@ -3,13 +3,15 @@ import Button from "@mui/material/Button";
 import Avatar from "../../../shared/components/Avatar";
 import Typography from "@mui/material/Typography";
 import OnlineIndicator from "./OnlineIndicator";
-import { chatTypes, getActions } from '../../../store/actions/chatActions'
+import { chatTypes, getActions as chatGetActions } from '../../../store/actions/chatActions'
+import { getActions as controlBarActions } from '../../../store/actions/controlBarActions'
 import { connect } from 'react-redux'
 
-const FriendsListItem = ({ id, username, isOnline, setChosenChatDetails }) => {
+const FriendsListItem = ({ id, username, isOnline, setChosenChatDetails, toggleFriendsBar }) => {
 
   const handleChooseActiveConversation = () => {
     setChosenChatDetails({ id, username }, chatTypes.DIRECT)
+    toggleFriendsBar(false) //close friend list // toggle with false value
   }
 
   return (
@@ -46,7 +48,8 @@ const FriendsListItem = ({ id, username, isOnline, setChosenChatDetails }) => {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    ...getActions(dispatch)
+    ...chatGetActions(dispatch),
+    ...controlBarActions(dispatch)
   }
 }
 export default connect(null, mapActionsToProps)(FriendsListItem);
