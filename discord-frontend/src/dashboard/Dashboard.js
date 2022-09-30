@@ -23,7 +23,7 @@ const Dashboard = ({ setUserDetails, isUserInRoom, isFriendsBarVisible }) => {
     if (!userDetails) {
       logout();
     } else {
-      console.log(userDetails);
+      //console.log(userDetails);
       setUserDetails(JSON.parse(userDetails));
       connectWithSocketServer(JSON.parse(userDetails))
     }
