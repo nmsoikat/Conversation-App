@@ -28,7 +28,7 @@ export const newRoomCreated = (data) => {
 export const updateActiveRoom = (data) => {
   //currently all active rooms came from server
   const { activeRooms } = data;
-  console.log('all active rooms', activeRooms);
+  //console.log('all active rooms', activeRooms);
   //one of my friend create the room
   const rooms = []
   const friends = store.getState().friends.friends;

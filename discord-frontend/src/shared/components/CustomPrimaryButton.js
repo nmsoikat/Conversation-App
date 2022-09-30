@@ -11,7 +11,7 @@ const CustomPrimaryButton = ({
     <Button
       variant="contained"
       sx={{
-        bgcolor: "#5865F2",
+        bgcolor: "#E94B3CFF",
         color: "white",
         textTransform: "none",
         fontSize: "16px",

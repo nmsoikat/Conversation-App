@@ -13,8 +13,8 @@ const getSocketServerInstance = (ioInstance) => {
 
 const addNewConnectedUser = ({ socketId, userId }) => {
   connectedUsers.set(socketId, { userId })
-  console.log("Connected users:");
-  console.log(connectedUsers);
+  //console.log("Connected users:");
+  //console.log(connectedUsers);
 }
 
 const removeDisconnectedUser = (socketId) => {
@@ -22,8 +22,8 @@ const removeDisconnectedUser = (socketId) => {
     connectedUsers.delete(socketId)
   }
 
-  console.log("all users after disconnected:");
-  console.log(connectedUsers);
+  //console.log("all users after disconnected:");
+  //console.log(connectedUsers);
 }
 
 //if same user connected with multiple device
@@ -68,8 +68,8 @@ const addNewActiveRoom = (userId, socketId) => {
 
   activeRooms = [...activeRooms, newActiveRoom]
 
-  console.log("New active room");
-  console.log(newActiveRoom);
+  //console.log("New active room");
+  //console.log(newActiveRoom);
 
   return newActiveRoom
 }
@@ -107,7 +107,7 @@ const joinActiveRoom = (roomId, newParticipantDetails) => {
   //add active room
   activeRooms.push(updatedRoom)
 
-  console.log({ activeRooms });
+  //console.log({ activeRooms });
 }
 
 const leaveActiveRoom = (roomId, participantSocketId) => {

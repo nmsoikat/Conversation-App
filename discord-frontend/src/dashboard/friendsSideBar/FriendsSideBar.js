@@ -12,6 +12,9 @@ const MainContainer = styled("div")({
   flexDirection: "column",
   alignItems: "center",
   backgroundColor: "#2F3136",
+  position: "absolute",
+  left: "72px",
+  zIndex: "2"
 });
 
 const FriendsSideBar = () => {

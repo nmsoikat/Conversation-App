@@ -7,7 +7,7 @@ import AppBar from "./appBar/AppBar";
 import { logout } from "../shared/utils/auth";
 import { connect } from "react-redux";
 import { getActions } from "../store/actions/authActions";
-import {connectWithSocketServer} from '../realtimeCommunication/socketConnection'
+import { connectWithSocketServer } from '../realtimeCommunication/socketConnection'
 import Room from "./room/Room";
 
 const Wrapper = styled("div")({
@@ -16,7 +16,7 @@ const Wrapper = styled("div")({
   display: "flex",
 });
 
-const Dashboard = ({ setUserDetails, isUserInRoom }) => {
+const Dashboard = ({ setUserDetails, isUserInRoom, isFriendsBarVisible }) => {
   useEffect(() => {
     const userDetails = localStorage.getItem("user");
 
@@ -32,7 +32,7 @@ const Dashboard = ({ setUserDetails, isUserInRoom }) => {
   return (
     <Wrapper>
       <SideBar />
-      <FriendsSideBar />
+      {isFriendsBarVisible && <FriendsSideBar />}
       <Messenger />
       <AppBar />
       {isUserInRoom && <Room />}
@@ -40,9 +40,10 @@ const Dashboard = ({ setUserDetails, isUserInRoom }) => {
   );
 };
 
-const mapStoreStateToProps = ({room}) => {
+const mapStoreStateToProps = ({ room, controlBar }) => {
   return {
-    ...room
+    ...room,
+    ...controlBar
   }
 }
 
