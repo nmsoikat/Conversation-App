@@ -8,7 +8,7 @@ const BoxWrapper = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: "#E94B3CFF",
+  background: "#cbcbcb",
 });
 
 const AuthBox = (props) => {
@@ -17,8 +17,8 @@ const AuthBox = (props) => {
       <Box
         sx={{
           width: 700,
-          height: 400,
-          bgcolor: "#36393f",
+          height: 410,
+          bgcolor: "#fff",
           borderRadius: "5px",
           boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
           display: "flex",
