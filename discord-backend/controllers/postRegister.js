@@ -30,10 +30,10 @@ exports.register = async (req, res, next) => {
         userId: user._id,
         mail: user.mail
       },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: '24h'
-      }
+      process.env.JWT_SECRET
+      // {
+      //   expiresIn: '24h'
+      // }
     )
 
     res.status(201).json({

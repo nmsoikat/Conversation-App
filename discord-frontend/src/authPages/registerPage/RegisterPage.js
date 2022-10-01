@@ -39,7 +39,7 @@ const RegisterPage = ({ register }) => {
 
   return (
     <AuthBox>
-      <Typography variant="h5" sx={{ color: "white " }}>
+      <Typography variant="h5" sx={{ color: "#222" }}>
         Create an account
       </Typography>
       <RegisterPageInputs
