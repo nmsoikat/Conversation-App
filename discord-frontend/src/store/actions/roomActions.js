@@ -7,6 +7,7 @@ export const roomActions = {
   SET_AUDIO_ONLY: "ROOM.SET_AUDIO_ONLY",
   SET_SCREEN_SHARE_STREAM: "ROOM.SET_SCREEN_SHARE_STREAM",
   SET_IS_USER_JOINED_WITH_ONLY_AUDIO: "ROOM.SET_IS_USER_JOINED_WITH_ONLY_AUDIO",
+  SET_VIDEO_SINGLE_VIEW_ENABLED: "ROOM.SET_VIDEO_SINGLE_VIEW_ENABLED",
 };
 
 export const setOpenRoom = (
@@ -78,3 +79,13 @@ export const setIsUserJoinedOnlyWithAudio = (onlyWithAudio) => {
     isUserJoinedWithOnlyAudio: onlyWithAudio,
   };
 };
+
+export const setVideoSingleView = ({isEnable, streamId}) => {
+  return {
+    type: roomActions.SET_VIDEO_SINGLE_VIEW_ENABLED,
+    videoSingleView: {
+      isEnable: isEnable,
+      streamId: streamId
+    },
+  };
+}
