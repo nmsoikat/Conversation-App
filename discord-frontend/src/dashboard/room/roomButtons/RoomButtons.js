@@ -6,6 +6,7 @@ import CloseRoomButton from "./CloseRoomButton";
 import ScreenShareButton from "./ScreenShareButton";
 import { connect } from "react-redux";
 import { getActions } from "../../../store/actions/roomActions";
+import VideoGridViewButton from "./VideoGridViewButton";
 
 const MainContainer = styled("div")({
   height: "15%",
@@ -19,10 +20,11 @@ const MainContainer = styled("div")({
 });
 
 const RoomButtons = (props) => {
-  const { localStream, isUserJoinedWithOnlyAudio } = props;
+  const { localStream, isUserJoinedWithOnlyAudio, videoSingleView } = props;
 
   return (
     <MainContainer>
+      {videoSingleView.isEnable && <VideoGridViewButton />}
       {!isUserJoinedWithOnlyAudio && <ScreenShareButton {...props} />}
       <MicButton localStream={localStream} />
       <CloseRoomButton />

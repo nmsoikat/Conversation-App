@@ -11,6 +11,10 @@ const initState = {
   screenSharingStream: null,
   isScreenSharingActive: false,
   isUserJoinedWithOnlyAudio: false,
+  videoSingleView: {
+    isEnable: false,
+    streamId: null
+  },
 };
 
 const reducer = (state = initState, action) => {
@@ -56,6 +60,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         isUserJoinedWithOnlyAudio: action.isUserJoinedWithOnlyAudio,
+      };
+    case roomActions.SET_VIDEO_SINGLE_VIEW_ENABLED:
+      return {
+        ...state,
+        videoSingleView: action.videoSingleView,
       };
     default:
       return state;

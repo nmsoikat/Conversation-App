@@ -7,14 +7,14 @@ const newConnectionHandler = async (socket, io) => {
 
   socketServerStore.addNewConnectedUser({
     socketId: socket.id,
-    userId: userDetails.userId
+    userId: userDetails?.userId
   })
 
   //when user is connected update pending friends invitation list also
-  friendsUpdates.updateFriendsPendingInvitation(userDetails.userId)
+  friendsUpdates.updateFriendsPendingInvitation(userDetails?.userId)
 
   //update friends list
-  friendsUpdates.updateFriendsList(userDetails.userId)
+  friendsUpdates.updateFriendsList(userDetails?.userId)
 
   //update active rooms 
   /*

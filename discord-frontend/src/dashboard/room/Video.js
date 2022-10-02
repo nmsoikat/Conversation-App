@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { styled } from "@mui/system";
+import { setVideoSingleView } from "../../store/actions/roomActions";
+import store from "../../store/store"
 
 const MainContainer = styled("div")({
   height: "50%",
@@ -13,7 +15,7 @@ const VideoEl = styled("video")({
   height: "100%",
 });
 
-const Video = ({ stream, isLocalStream }) => {
+const Video = ({ stream, isLocalStream, styleObj}) => {
   const videoRef = useRef();
 
   useEffect(() => {
@@ -25,8 +27,12 @@ const Video = ({ stream, isLocalStream }) => {
     };
   }, [stream]);
 
+  const videoSingleViewOpen = ({ isEnable, streamId }) => {
+    store.dispatch(setVideoSingleView({ isEnable, streamId }))
+  }
+
   return (
-    <MainContainer>
+    <MainContainer onClick={() => videoSingleViewOpen({ isEnable: true, streamId: stream.id })} style={styleObj}>
       <VideoEl ref={videoRef} autoPlay muted={isLocalStream ? true : false} />
     </MainContainer>
   );
