@@ -9,7 +9,7 @@ import { getActions } from "../../../store/actions/roomActions";
 import VideoGridViewButton from "./VideoGridViewButton";
 
 const MainContainer = styled("div")({
-  height: "15%",
+  height: "60px",
   width: "100%",
   backgroundColor: "#E94B3CFF",
   borderTopLeftRadius: "8px",

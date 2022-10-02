@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Video from "./Video";
 
 const MainContainer = styled("div")({
-  height: "85%",
+  height: "calc(100% - 60px)",
   width: "100%",
   display: "flex",
   flexWrap: "wrap",
