@@ -2,9 +2,18 @@ import axios from "axios";
 import { logout } from "./shared/utils/auth";
 
 //live api
+// const apiClient = axios.create({
+//   baseURL: "https://discord-clone-api.onrender.com/api/v1"
+//   // timeout: 2000,
+// });
 const apiClient = axios.create({
-  baseURL: "https://discord-clone-api.onrender.com/api/v1"
-  // timeout: 2000,
+  baseURL: "https://discord-clone-api.onrender.com/api/v1",
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
+
 });
 
 //localhost
