@@ -8,6 +8,7 @@ const MainContainer = styled("div")({
   position: "absolute",
   right: 0,
   bottom: 0,
+  zIndex: 2,
   borderRadius: "8px",
   display: "flex",
   flexDirection: "column",
@@ -17,7 +18,8 @@ const MainContainer = styled("div")({
 });
 
 const fullScreenRoomStyle = {
-  width: "calc(100% - 72px)",
+  // width: "calc(100% - 72px)",
+  width: "100%",
   height: "100vh",
 };
 

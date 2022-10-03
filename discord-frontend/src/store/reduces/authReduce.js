@@ -1,6 +1,7 @@
 import { authActions } from "../actions/authActions";
 
 const initState = {
+  isLoading: false,
   userDetails: null,
 };
 
@@ -10,6 +11,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         userDetails: action.userDetails,
+      };
+    case authActions.SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading
       };
     default:
       return state;
