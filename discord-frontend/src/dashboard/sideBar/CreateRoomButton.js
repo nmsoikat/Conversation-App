@@ -12,6 +12,7 @@ const CreateRoomButton = ({ isUserInRoom }) => {
 
   return (
     <Button
+    className="friendBarButton"
       disabled={isUserInRoom}
       onClick={createNewRoomHandler}
       style={{

@@ -1,11 +1,14 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { connect } from "react-redux";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CustomPrimaryButton = ({
   label,
   additionalStyles,
   disabled,
   onClick,
+  isLoading
 }) => {
   return (
     <Button
@@ -23,9 +26,15 @@ const CustomPrimaryButton = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {label}
+      {isLoading ? <CircularProgress sx={{width: '25px !important', height: '25px !important'}} color="inherit" /> : label}
     </Button>
   );
 };
 
-export default CustomPrimaryButton;
+const mapStateStoreToProps = ({ auth }) => {
+  return {
+    ...auth
+  }
+}
+
+export default connect(mapStateStoreToProps)(CustomPrimaryButton);
