@@ -22,8 +22,19 @@ const PORT = process.env.PORT || process.env.API_PORT
 
 const app = express()
 app.use(express.json())
-app.use(cors())
-// app.use(cors({origin: 'https://connect-e5rw.onrender.com'}))
+
+const whitelist = ['https://connect-app-fe.onrender.com'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }, credentials: true
+}
+app.use(cors(corsOptions))
+// app.use(cors())
 
 
 //register routes

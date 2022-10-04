@@ -10,7 +10,7 @@ export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
 
   //live
-  socket = io('https://discord-clone-api.onrender.com', {
+  socket = io('https://connect-app-api.onrender.com', {
     auth: {
       token: jwtToken
     }

@@ -3,17 +3,16 @@ import { logout } from "./shared/utils/auth";
 
 //live api
 // const apiClient = axios.create({
-//   baseURL: "https://discord-clone-api.onrender.com/api/v1"
+//   baseURL: "https://connect-app-api.onrender.com/api/v1"
 //   // timeout: 2000,
 // });
 const apiClient = axios.create({
-  baseURL: "https://discord-clone-api.onrender.com/api/v1",
-  withCredentials: false,
+  baseURL: "https://connect-app-api.onrender.com/api/v1",
   headers: {
-    'Access-Control-Allow-Origin' : '*',
-    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    }
-
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+  withCredentials: true
 });
 
 //localhost
