@@ -2,18 +2,18 @@ import axios from "axios";
 import { logout } from "./shared/utils/auth";
 
 //live api
-// const apiClient = axios.create({
-//   baseURL: "https://connect-app-api.onrender.com/api/v1"
-//   // timeout: 2000,
-// });
 const apiClient = axios.create({
-  baseURL: "https://connect-app-api.onrender.com/api/v1",
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  withCredentials: true
+  baseURL: "https://connect-app-api.onrender.com/api/v1"
+  // timeout: 2000,
 });
+// const apiClient = axios.create({
+//   baseURL: "https://connect-app-api.onrender.com/api/v1",
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Access-Control-Allow-Origin': '*',
+//   },
+//   withCredentials: true
+// });
 
 //localhost
 // const apiClient = axios.create({

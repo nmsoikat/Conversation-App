@@ -22,20 +22,20 @@ const PORT = process.env.PORT || process.env.API_PORT
 
 const app = express()
 
-const whitelist = ['https://connect-app-fe.onrender.com', 'http://localhost:3000'];
-const corsOptions = {
-  origin: (origin, callback) => {
-    console.log(origin);
-    console.log(whitelist.indexOf(origin));
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }, credentials: true
-}
-app.use(cors(corsOptions))
-// app.use(cors())
+// const whitelist = ['https://connect-app-fe.onrender.com', 'http://localhost:3000'];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     console.log(origin);
+//     console.log(whitelist.indexOf(origin));
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }, credentials: true
+// }
+// app.use(cors(corsOptions))
+app.use(cors())
 
 app.use(express.json())
 
