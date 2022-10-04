@@ -23,9 +23,11 @@ const PORT = process.env.PORT || process.env.API_PORT
 const app = express()
 app.use(express.json())
 
-const whitelist = ['https://connect-app-fe.onrender.com'];
+const whitelist = ['https://connect-app-fe.onrender.com', 'http://localhost:3000'];
 const corsOptions = {
   origin: (origin, callback) => {
+    console.log(origin);
+    console.log(whitelist.indexOf(origin));
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {

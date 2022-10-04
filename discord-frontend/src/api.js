@@ -46,7 +46,7 @@ apiClient.interceptors.request.use(
 // public routes
 export const login = async (data) => {
   try {
-    //console.log(data);
+    console.log(data);
     return await apiClient.post("/auth/login", data);
   } catch (exception) {
     return {

@@ -34,7 +34,7 @@ const login = (userDetails, navigate) => {
     dispatch(setLoading(true));
     const response = await api.login(userDetails);
     dispatch(setLoading(false));
-    //console.log(response);
+    console.log(response);
     if (response.error) {
       let errMessage = response?.exception?.response?.data;
       dispatch(openAlertMessage(errMessage ? errMessage : 'Internal server error'));
