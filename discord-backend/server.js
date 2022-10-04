@@ -21,7 +21,6 @@ const friendsInvitationRoutes = require("./routes/friendsInvitationRoutes")
 const PORT = process.env.PORT || process.env.API_PORT
 
 const app = express()
-app.use(express.json())
 
 const whitelist = ['https://connect-app-fe.onrender.com', 'http://localhost:3000'];
 const corsOptions = {
@@ -37,6 +36,8 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 // app.use(cors())
+
+app.use(express.json())
 
 
 //register routes
