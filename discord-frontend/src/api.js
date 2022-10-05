@@ -1,9 +1,14 @@
 import axios from "axios";
 import { logout } from "./shared/utils/auth";
 
+//localhost
+// const apiClient = axios.create({
+//   baseURL: "http://localhost:5001/api/v1",
+//   timeout: 1000,
+// });
+
 const apiClient = axios.create({
-  baseURL: "http://localhost:5001/api/v1",
-  timeout: 1000,
+  baseURL: "https://conversation-app-be.onrender.com/api/v1"
 });
 
 //host local ipv4
