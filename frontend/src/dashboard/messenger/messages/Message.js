@@ -4,31 +4,43 @@ import Avatar from "../../../shared/components/Avatar";
 import Typography from "@mui/material/Typography";
 
 const MainContainer = styled("div")({
-  width: "97%",
+  width: "100%",
   display: "flex",
-  marginTop: "10px",
+  marginTop: "35px",
 });
 
 const AvatarContainer = styled("div")({
-  width: "70px",
+  marginRight: "8px",
+  marginTop: "-16px"
 });
 
 const MessageContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
+  backgroundColor: "rgb(177 204 234)",
+  width: "100%",
+  borderRadius: "5px",
+  marginBottom: "5px",
 });
 
 const MessageContent = styled("div")({
-  color: "#DCDDDE",
+  // color: "#222",
+  padding: "8px",
 });
 
 const SameAuthorMessageContent = styled("div")({
-  color: "#DCDDDE",
-  width: "97%",
+  marginLeft: "55px",
+  color: "#222",
+  padding: "8px",
+  backgroundColor: "rgb(177 204 234)",
+  width: "95%",
+  width: "calc(100% - 68px)",
+  borderRadius: "5px",
+  marginBottom: "5px"
 });
 
 const SameAuthorMessageText = styled("span")({
-  marginLeft: "70px",
+  // marginLeft: "70px",
 });
 
 const Message = ({ content, sameAuthor, username, date, sameDay }) => {
@@ -55,10 +67,10 @@ const Message = ({ content, sameAuthor, username, date, sameDay }) => {
       <AvatarContainer>
         <Avatar username={username} />
       </AvatarContainer>
-      <MessageContainer>
-        <Typography style={{ fontSize: "16px", color: "white" }}>
+      <MessageContainer style={{ backgroundColor: username === "rohim" ? "rgb(218 228 239)" : "rgb(177 204 234)" }}>
+        <Typography style={{ fontSize: "16px", marginTop: "-20px", color: "#333" }}>
           {username[0].toUpperCase() + username.slice(1)}
-          <span style={{ fontSize: "12px", color: "#72767d" }}>{date}</span>
+          {/* <span style={{ fontSize: "12px", color: "#ddd" }}>{date}</span> */}
         </Typography>
         <MessageContent>{content}</MessageContent>
       </MessageContainer>

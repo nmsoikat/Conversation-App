@@ -42,7 +42,8 @@ const AppBar = ({ name }) => {
 
         <div>
           <span style={{ display: "block", color: "#fff" }}>
-            {name[0].toUpperCase() + name.slice(1)}
+            Rohim
+            {/* {name[0].toUpperCase() + name.slice(1)} */}
           </span>
           <span style={{ display: "inline-block", color: "green" }}>active</span>
         </div>

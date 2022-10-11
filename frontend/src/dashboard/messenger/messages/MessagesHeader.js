@@ -9,10 +9,23 @@ const MainContainer = styled("div")({
   marginTop: "10px",
 });
 
+const StartConversationAvatar = styled("div")({
+  width: "100px",
+  height: "100px",
+  borderRadius: "50%",
+  margin: "10px auto",
+  backgroundColor: "#ddd",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "20px",
+  fontWeight: "700",
+});
+
 const MessagesHeader = ({ name = "" }) => {
   return (
     <MainContainer>
-      <Avatar large username={name} />
+      <StartConversationAvatar>{name.substring(0, 2)}</StartConversationAvatar>
       <Typography
         variant="h4"
         sx={{
@@ -20,6 +33,7 @@ const MessagesHeader = ({ name = "" }) => {
           color: "white",
           marginLeft: "5px",
           marginRight: "5px",
+          textAlign: "center"
         }}
       >
         {name[0].toUpperCase() + name.slice(1)}
@@ -29,6 +43,7 @@ const MessagesHeader = ({ name = "" }) => {
           color: "#b9bbbe",
           marginLeft: "5px",
           marginRight: "5px",
+          textAlign: "center"
         }}
       >
         This is the beginning of your conversation with {name}

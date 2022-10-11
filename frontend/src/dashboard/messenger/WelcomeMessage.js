@@ -14,8 +14,8 @@ const Wrapper = styled("div")({
 const WelcomeMessage = () => {
   return (
     <Wrapper>
-      <Typography variant="h6" sx={{ color: "white" }}>
-        To start chatting - choose conversation
+      <Typography variant="h6" sx={{ color: "#081D34" }}>
+        To start chatting - Choose conversation
       </Typography>
     </Wrapper>
   );

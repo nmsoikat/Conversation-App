@@ -33,6 +33,7 @@ const Messages = ({ chosenChatDetails, messages }) => {
   return (
     <MainContainer>
       <MessagesHeader name={chosenChatDetails?.username} />
+      
       {messages.map((message, index) => {
         const sameAuthor =
           index > 0 &&
