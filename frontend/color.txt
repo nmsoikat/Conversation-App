@@ -1,2 +1,7 @@
 login-text:#249FBA
 login-bg:#0F1925
+app-bar-bg1:#166E47
+message-container-bg1:#FAFAFA
+app-bar-bg2:#081D34
+message-container-bg2:#EDF0F8
+

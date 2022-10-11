@@ -5,6 +5,7 @@ import { styled } from "@mui/system";
 const Wrapper = styled("div")({
   flexGrow: 1,
   height: "100%",
+  height: "calc(100% - 48px)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

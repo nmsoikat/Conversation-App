@@ -1,11 +1,15 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import VideoCallIcon from '@mui/icons-material/VideoCall';
+import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import * as roomHandler from "../../realtimeCommunication/roomHandler";
+import { connect } from "react-redux";
+import { getActions } from "../../store/actions/roomActions";
 
-const CreateRoomButton = ({ isUserInRoom }) => {
+const AudioOnlyButton = ({ isUserInRoom, setAudioOnly }) => {
 
   const createNewRoomHandler = () => {
+    setAudioOnly(true);
+
     // create a room and send information to the server
     roomHandler.createNewRoom();
   };
@@ -27,9 +31,15 @@ const CreateRoomButton = ({ isUserInRoom }) => {
         backgroundColor: "#E94B3CFF",
       }}
     >
-      <VideoCallIcon />
+      <HeadsetMicIcon />
     </Button>
   );
 };
 
-export default CreateRoomButton;
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(AudioOnlyButton);

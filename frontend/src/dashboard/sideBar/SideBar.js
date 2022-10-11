@@ -2,16 +2,16 @@ import React from "react";
 import { styled } from "@mui/system";
 import MainPageButton from "./MainPageButton";
 import CreateRoomButton from "./CreateRoomButton";
+import AudioOnlyButton from "./AudioOnlyButton";
 import { connect } from "react-redux";
 import ActiveRoomButton from "./ActiveRoomButton";
 
 const MainContainer = styled("div")({
   width: "72px",
-  height: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  backgroundColor: "#2D2926FF",
+  backgroundColor: "#081D34",
   flexShrink: 0
 });
 
@@ -20,6 +20,7 @@ const SideBar = ({ activeRooms, isUserInRoom }) => {
     <MainContainer>
       <MainPageButton />
       <CreateRoomButton isUserInRoom={isUserInRoom} />
+      <AudioOnlyButton isUserInRoom={isUserInRoom} />
       {activeRooms.map((room) => (
         <ActiveRoomButton
           roomId={room.roomId}

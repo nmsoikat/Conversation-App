@@ -10,9 +10,16 @@ import { getActions } from "../store/actions/authActions";
 import { connectWithSocketServer } from '../realtimeCommunication/socketConnection'
 import Room from "./room/Room";
 
-const Wrapper = styled("div")({
+const MainContainer = styled("div")({
   width: "100%",
   height: "100vh",
+});
+
+const Wrapper = styled("div")({
+  width: "100%",
+  height: "100%",
+  marginTop: "3px",
+  height: "calc(100% - 54px)",
   display: "flex",
 });
 
@@ -30,13 +37,15 @@ const Dashboard = ({ setUserDetails, isUserInRoom, isFriendsBarVisible }) => {
   }, []);
 
   return (
-    <Wrapper>
-      <SideBar />
-      {isFriendsBarVisible && <FriendsSideBar />}
-      <Messenger />
+    <MainContainer>
       <AppBar />
-      {isUserInRoom && <Room />}
-    </Wrapper>
+      <Wrapper>
+        <SideBar />
+        {isFriendsBarVisible && <FriendsSideBar />}
+        <Messenger />
+        {isUserInRoom && <Room />}
+      </Wrapper>
+    </MainContainer>
   );
 };
 

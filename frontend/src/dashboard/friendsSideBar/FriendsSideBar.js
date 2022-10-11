@@ -8,12 +8,13 @@ import PendingInvitationsList from "./pendingInvitationsList/PendingInvitationsL
 const MainContainer = styled("div")({
   width: "224px",
   height: "100%",
+  height: "calc(100% - 54px)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  backgroundColor: "#2F3136",
+  backgroundColor: "#fff",
   position: "absolute",
-  left: "72px",
+  left: "74px",
   zIndex: "2"
 });
 
@@ -21,7 +22,7 @@ const FriendsSideBar = () => {
   return (
     <MainContainer>
       <AddFriendButton />
-      <FriendsTitle title="Private Messages" />
+      {/* <FriendsTitle title="Private Messages" /> */}
       <FriendsList />
       <FriendsTitle title="Invitations" />
       <PendingInvitationsList />

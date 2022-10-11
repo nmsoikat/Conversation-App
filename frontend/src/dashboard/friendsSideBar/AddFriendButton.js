@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import CustomPrimaryButton from "../../shared/components/CustomPrimaryButton";
 import AddFriendDialog from "./AddFriendDialog";
+import { styled } from "@mui/system";
 
-const additionalStyles = {
-  marginTop: "10px",
-  marginLeft: "5px",
-  width: "80%",
+const InviteButtonWrap = styled("div")({
+  width: "100%", 
+  display: "flex", 
+  marginTop: "5px", 
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "5px 10px",
+  boxSizing: "border-box",
+  borderBottom: "1px solid #ddd"
+});
+
+const InviteButton = styled("div")({
+  width: "60px",
   height: "30px",
-  background: "#6a9b4a",
-  // background: "#3ba55d",
-};
+  backgroundColor: "#2D6BE6",
+  textAlign: "center",
+  color: "#fff",
+  borderRadius: "10px",
+  lineHeight: "30px",
+  cursor: "pointer"
+});
 
 const AddFriendButton = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -24,11 +38,15 @@ const AddFriendButton = () => {
 
   return (
     <>
-      <CustomPrimaryButton
+      {/* <CustomPrimaryButton
         additionalStyles={additionalStyles}
-        label="Add Friend"
+        label="Invite"
         onClick={handleOpenAddFriendDialog}
-      />
+      /> */}
+      <InviteButtonWrap>
+        <span style={{ display: "inline-block", color: "#8e9297" }}>Private Message</span>
+        <InviteButton onClick={handleOpenAddFriendDialog}>Invite</InviteButton>
+      </InviteButtonWrap>
       <AddFriendDialog
         isDialogOpen={isDialogOpen}
         closeDialogHandler={handleCloseAddFriendDialog}

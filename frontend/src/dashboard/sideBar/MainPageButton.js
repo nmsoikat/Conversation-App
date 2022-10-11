@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import GroupsIcon from "@mui/icons-material/Groups";
+import TextsmsIcon from '@mui/icons-material/Textsms';
 import { connect } from "react-redux"
 import { getActions } from "../../store/actions/controlBarActions"
 
@@ -25,7 +25,7 @@ const MainPageButton = ({ isFriendsBarVisible, toggleFriendsBar }) => {
       }}
       onClick={friendsBarToggler}
     >
-      <GroupsIcon />
+      <TextsmsIcon />
     </Button>
   );
 };
