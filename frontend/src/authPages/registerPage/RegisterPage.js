@@ -39,8 +39,8 @@ const RegisterPage = ({ register }) => {
 
   return (
     <AuthBox>
-      <Typography variant="h5" sx={{ color: "#222" }}>
-        Create an account
+      <Typography variant="h2" sx={{ textAlign: "center", color: "#249FBA"}}>
+        NEW USER
       </Typography>
       <RegisterPageInputs
         mail={mail}

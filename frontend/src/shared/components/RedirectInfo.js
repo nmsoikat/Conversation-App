@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 const RedirectText = styled("span")({
   display:'inline-block',
   marginTop: '10px',
-  color: "#E94B3CFF",
+  color: "#249FBA",
   fontWeight: 700,
   cursor: "pointer",
 });
@@ -18,7 +18,7 @@ const RedirectInfo = ({
 }) => {
   return (
     <Typography
-      sx={{ color: "#72767d" }}
+      sx={{ color: "#fff" }}
       style={additionalStyles ? additionalStyles : {}}
       variant="subtitle2"
     >

@@ -27,7 +27,7 @@ const LoginPageFooter = ({ handleLogin, isFormValid }) => {
         <div>
           <CustomPrimaryButton
             label="Log in"
-            additionalStyles={{ marginTop: "30px" }}
+            additionalStyles={{ marginTop: "50px" }}
             disabled={!isFormValid}
             onClick={handleLogin}
           />

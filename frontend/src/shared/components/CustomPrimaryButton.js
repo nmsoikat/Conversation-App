@@ -12,21 +12,22 @@ const CustomPrimaryButton = ({
 }) => {
   return (
     <Button
-      variant="contained"
+      variant="outline"
       sx={{
-        bgcolor: "#E94B3CFF",
+        backgroundColor: disabled ? "none" : "#249FBA",
         color: "white",
         textTransform: "none",
         fontSize: "16px",
         fontWeight: 500,
         width: "100%",
         height: "40px",
+        border: "1px solid #249FBA"
       }}
       style={additionalStyles ? additionalStyles : {}}
-      disabled={disabled}
+      // disabled={disabled}
       onClick={onClick}
     >
-      {isLoading ? <CircularProgress sx={{width: '25px !important', height: '25px !important'}} color="inherit" /> : label}
+      {isLoading ? <CircularProgress sx={{ width: '25px !important', height: '25px !important' }} color="inherit" /> : label}
     </Button>
   );
 };
