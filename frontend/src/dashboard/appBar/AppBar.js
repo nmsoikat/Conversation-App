@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/system";
 import DropdownMenu from "./DropdownMenu";
 import ChosenOptionLabel from "./ChosenOptionLabel";
 import { connect } from "react-redux";
+import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const MainContainer = styled("div")({
   // position: "absolute",
@@ -15,8 +16,8 @@ const MainContainer = styled("div")({
   boxShadow: "0 3px rgb(36 98 166 / 63%);",
   // width: "calc(100% - 102px)",
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
+  alignItems: "center",
   padding: "0 15px",
   zIndex: "0"
 });
@@ -28,9 +29,19 @@ const ProfileWrap = styled("div")({
 
 
 const AppBar = ({ name }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleOpenAddFriendDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseAddFriendDialog = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <MainContainer>
-      <ProfileWrap>
+      <ProfileWrap onClick={handleOpenAddFriendDialog}>
         <div style={{
           width: "40px",
           height: "40px",
@@ -48,16 +59,22 @@ const AppBar = ({ name }) => {
           <span style={{ display: "inline-block", color: "green" }}>active</span>
         </div>
       </ProfileWrap>
+
+      <UpdateProfileDialog
+        isDialogOpen={isDialogOpen}
+        closeDialogHandler={handleCloseAddFriendDialog}
+      />
+
       <ChosenOptionLabel />
       <DropdownMenu />
     </MainContainer>
   );
 };
 
-const mapStoreStateToProps = ({ chat }) => {
+const mapStoreStateToProps = ({ userDetails }) => {
   return {
-    name: chat.chosenChatDetails?.username
+    name: userDetails?.username
   }
 }
 
-export default connect(mapStoreStateToProps)(AppBar);
+export default connect(mapStoreStateToProps, null)(AppBar);

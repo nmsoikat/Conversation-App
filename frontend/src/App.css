@@ -1,0 +1,7 @@
+.profileImgWrap:hover .profileImgEditIcon {
+  display: block;
+}
+
+.userUpdateDialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  min-width: 400px;
+}

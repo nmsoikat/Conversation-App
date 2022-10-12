@@ -21,7 +21,7 @@ const AddFriendDialog = ({
 
   const handleSendInvitation = () => {
     // send friend request to server
-    sendFriendInvitation({targetMailAddress: mail}, closeDialogHandler)
+    sendFriendInvitation({ targetMailAddress: mail }, closeDialogHandler)
   };
 
   const handleCloseDialog = () => {
@@ -36,14 +36,14 @@ const AddFriendDialog = ({
   return (
     <div>
       <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>
-          <Typography>Invite a Friend</Typography>
+        <DialogTitle sx={{ bgcolor: "#0F1925", }}>
+          <Typography sx={{ fontWeight: "bold", textAlign: "center", fontSize: "20px", color: "#fff" }}>Invite a Friend</Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ bgcolor: "#0F1925", }}>
           {/* <DialogContentText> */}
-            <Typography>
-              Enter e-mail address of friend which you would like to invite
-            </Typography>
+          <Typography sx={{ color: "#fff" }}>
+            Enter e-mail address of friend which you would like to invite
+          </Typography>
           {/* </DialogContentText> */}
           <InputWithLabel
             label="Mail"
@@ -53,7 +53,7 @@ const AddFriendDialog = ({
             placeholder="Enter mail address"
           />
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ bgcolor: "#0F1925", }}>
           <CustomPrimaryButton
             onClick={handleSendInvitation}
             disabled={!isFormValid}
