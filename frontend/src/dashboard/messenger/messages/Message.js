@@ -34,7 +34,7 @@ const SameAuthorMessageContent = styled("div")({
   padding: "8px",
   backgroundColor: "rgb(177 204 234)",
   width: "95%",
-  width: "calc(100% - 68px)",
+  width: "calc(100% - 70px)",
   borderRadius: "5px",
   marginBottom: "5px"
 });
@@ -43,12 +43,11 @@ const SameAuthorMessageText = styled("span")({
   // marginLeft: "70px",
 });
 
-const Message = ({ content, sameAuthor, username, date, sameDay }) => {
-  //get ref of new message element 
-  const newMessageRef = useRef();
-
-  // scroll to new message 
-  // why useEffect here, so this can apply when message load or create
+const Message = ({ content, sameAuthor, username, date, sameDay, newMessageRef }) => {
+  // //get ref of new message element 
+  //// const newMessageRef = useRef();
+  //// scroll to new message 
+  //// why useEffect here, so this can apply when message load or create
   useEffect(() => {
     // need reference to show this element
     newMessageRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -63,6 +62,7 @@ const Message = ({ content, sameAuthor, username, date, sameDay }) => {
   }
 
   return (
+    // ref={newMessageRef}
     <MainContainer ref={newMessageRef}>
       <AvatarContainer>
         <Avatar username={username} />

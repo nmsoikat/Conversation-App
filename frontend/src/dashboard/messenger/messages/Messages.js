@@ -9,7 +9,9 @@ import DateSeparator from "./DateSeparator";
 const MainContainer = styled("div")({
   // height: "calc(100% - 60px)",
   height: "100%",
-  height: "calc(100% - 48px)",
+  height: "calc(100% - 60px)",
+  paddingBottom: "25px",
+  boxSizing: "border-box",
   overflow: "auto",
   display: "flex",
   flexDirection: "column",
@@ -27,7 +29,7 @@ const convertDateToHumanReadable = (date, format) => {
   return format.replace(/mm|dd|yy|yyy/gi, (matched) => map[matched]);
 };
 
-const Messages = ({ chosenChatDetails, messages }) => {
+const Messages = ({ chosenChatDetails, messages, newMessageRef}) => {
   //console.log("messages:");
   //console.log(messages);
   return (
@@ -66,6 +68,7 @@ const Messages = ({ chosenChatDetails, messages }) => {
                 "dd/mm/yy"
               )}
               sameDay={sameDay}
+              newMessageRef={newMessageRef}
             />
           </div>
         );

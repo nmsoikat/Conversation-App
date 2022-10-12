@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/system";
 
 const Separator = styled("div")({
-  width: "95%",
+  width: "100%",
   backgroundColor: "#b9bbbe",
   height: "1px",
   position: "relative",
@@ -11,9 +11,11 @@ const Separator = styled("div")({
 });
 
 const DateLabel = styled("span")({
-  backgroundColor: "#36393f",
+  backgroundColor: "#EDF0F8",
+  border:"1px solid #b9bbbe",
+  borderRadius: "5px",
   position: "absolute",
-  left: "45%",
+  left: "47%",
   top: "-10px",
   color: "#b9bbbe",
   padding: "0 5px",

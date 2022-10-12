@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/system";
 import Messages from "./messages/Messages";
 import NewMessageInput from "./NewMessageInput";
@@ -9,6 +9,10 @@ const Wrapper = styled("div")({
 });
 
 const MessengerContent = ({ chosenChatDetails }) => {
+  //get ref of new message element 
+  const [newMessageRef, setNewMessageRef] = useState(useRef())
+
+
   useEffect(() => {
     //fetching chat history from specific user id
     getDirectChatHistory({
@@ -17,9 +21,9 @@ const MessengerContent = ({ chosenChatDetails }) => {
   }, [chosenChatDetails]);
 
   return (
-    <Wrapper>
-      <Messages />
-      <NewMessageInput />
+    <Wrapper >
+      <Messages newMessageRef={newMessageRef} />
+      <NewMessageInput newMessageRef={newMessageRef} />
     </Wrapper>
   );
 };

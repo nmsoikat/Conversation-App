@@ -4,7 +4,7 @@ const chatUpdates = require("./updates/chat");
 
 const directMessageHandler = async (socket, data) => {
   try {
-    console.log("direct message event is being handled");
+    // console.log("direct message event is being handled");
 
     const { userId } = socket.user;
     const { receiverUserId, content } = data;

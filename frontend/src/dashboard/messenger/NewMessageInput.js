@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "@mui/system";
 import { connect } from "react-redux";
 import { sendDirectMessage } from "../../realtimeCommunication/socketConnection";
+import SendIcon from '@mui/icons-material/Send';
 
 const MainContainer = styled("div")({
   height: "60px",
@@ -12,17 +13,18 @@ const MainContainer = styled("div")({
 });
 
 const Input = styled("input")({
-  backgroundColor: "#2f3136",
-  border: "1px solid #E94B3CFF",
-  width: "98%",
+  backgroundColor: "#fff",
+  border: "1px solid #081D34",
+  width: "60%",
   height: "44px",
   color: "white",
   borderRadius: "10px",
   fontSize: "14px",
   padding: "0 10px",
+  color: "#222"
 });
 
-const NewMessageInput = ({ chosenChatDetails }) => {
+const NewMessageInput = ({ chosenChatDetails, newMessageRef }) => {
   const [message, setMessage] = useState("");
 
   const handleMessageValueChange = (event) => {
@@ -31,7 +33,9 @@ const NewMessageInput = ({ chosenChatDetails }) => {
 
   const handleKeyPressed = (event) => {
     if (event.key === "Enter") {
-      handleSendMessage();
+      if (message) {
+        handleSendMessage();
+      }
     }
   };
 
@@ -42,6 +46,8 @@ const NewMessageInput = ({ chosenChatDetails }) => {
         content: message,
       });
       setMessage("");
+
+      newMessageRef.current?.scrollIntoView({ behavior: "smooth" })
     }
   };
 
@@ -52,6 +58,19 @@ const NewMessageInput = ({ chosenChatDetails }) => {
         value={message}
         onChange={handleMessageValueChange}
         onKeyDown={handleKeyPressed}
+      />
+
+      <SendIcon
+        style={{
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          padding: "8px",
+          marginLeft: "10px",
+          color: "#081D34",
+          border: "1px solid #081D34",
+          cursor: "pointer"
+        }}
+        onClick={handleSendMessage}
       />
     </MainContainer>
   );

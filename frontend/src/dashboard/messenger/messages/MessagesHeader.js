@@ -30,7 +30,7 @@ const MessagesHeader = ({ name = "" }) => {
         variant="h4"
         sx={{
           fontWeight: "bold",
-          color: "white",
+          color: "#081D34",
           marginLeft: "5px",
           marginRight: "5px",
           textAlign: "center"
@@ -40,7 +40,7 @@ const MessagesHeader = ({ name = "" }) => {
       </Typography>
       <Typography
         sx={{
-          color: "#b9bbbe",
+          color: "#081D34",
           marginLeft: "5px",
           marginRight: "5px",
           textAlign: "center"
