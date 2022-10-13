@@ -99,7 +99,7 @@ const UpdateProfileDialog = ({
               width: "150px",
               height: "150px",
               borderRadius: "50%",
-              background: `url("upload/${userDetails.profileImg ? userDetails.profileImg : 'default-profile-img.png'}")`,
+              backgroundImage: `url("upload/${userDetails?.profileImg ? userDetails.profileImg : 'default-profile-img.png'}")`,
               backgroundSize: "cover",
               backgroundPosition: "center center"
             }}></div>

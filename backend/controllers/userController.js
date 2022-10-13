@@ -1,11 +1,13 @@
 const User = require("../models/user");
+const fs = require('fs')
+const path = require("path")
 
 exports.updateUsername = async (req, res, next) => {
   try {
     const { userId, username } = req.body;
-    const user = await User.findByIdAndUpdate(userId, { username }, {new:true})
+    const user = await User.findByIdAndUpdate(userId, { username }, { new: true })
 
-    return res.status(201).json({
+    return res.status(200).json({
       isSuccess: true,
       userDetails: {
         username: user.username,
@@ -23,12 +25,29 @@ exports.updateUserProfileImage = async (req, res, next) => {
     const { userId } = req.body;
     const file = req.file
 
-    const user = await User.findByIdAndUpdate(userId, { profileImg: file.filename }, {new: true})
+    const oldUser = await User.findByIdAndUpdate(userId, { profileImg: file.filename }) //update and return old data
+    const updatedUser = await User.findById(userId)
 
-    return res.status(201).json({
+
+    //console.log(path.resolve('../frontend/public/upload', file.filename)); -> C:\...\...\...\Conversation-App\frontend\public\upload\5-1665692524428.jpg
+    //console.log(path.join('frontend', 'public', 'upload', file.filename)); -> frontend\public\upload\3-1665692379777.jpg
+    //remove old image file in async way
+    if (oldUser.profileImg) {
+      await new Promise((resolve, reject) => {
+        fs.unlink(path.resolve('../frontend/public/upload', oldUser.profileImg), (err) => {
+          if (err) {
+            reject("old image is not deleted")
+          }
+
+          resolve("old image is deleted")
+        })
+      })
+    }
+
+    return res.status(200).json({
       isSuccess: true,
       userDetails: {
-        profileImg: user.profileImg,
+        profileImg: updatedUser.profileImg,
       },
       message: "Profile image updated"
     })

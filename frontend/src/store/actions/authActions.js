@@ -77,7 +77,6 @@ const updateUserName = (data) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     const response = await api.updateName(data);
-    console.log(response);
     dispatch(setLoading(false));
 
     if (response.error) {
@@ -85,6 +84,13 @@ const updateUserName = (data) => {
       dispatch(openAlertMessage(errMessage ? errMessage : 'Internal server error'))
     } else {
       const { userDetails } = response?.data;
+
+      //when dashboard is render 
+      //getting user from local storage
+      //so we need to update also local 
+      let localUserDetails = JSON.parse(localStorage.getItem("user"));
+      localStorage.setItem("user", JSON.stringify({ ...localUserDetails, username: userDetails.username }));
+
       dispatch(setUserDetails(userDetails));
     }
   }
@@ -94,12 +100,20 @@ const updateProfileImage = (formData) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     const response = await api.updateProfileImage(formData);
+    console.log(response);
     dispatch(setLoading(false));
     if (response.error) {
       const errMessage = response?.exception?.response?.data
       dispatch(openAlertMessage(errMessage ? errMessage : 'Internal server error'))
     } else {
       const { userDetails } = response?.data;
+
+      //when dashboard is render 
+      //getting user from local storage
+      //so we need to update also local 
+      let localUserDetails = JSON.parse(localStorage.getItem("user"));
+      localStorage.setItem("user", JSON.stringify({ ...localUserDetails, profileImg: userDetails.profileImg }));
+
       dispatch(setUserDetails(userDetails));
     }
   }
