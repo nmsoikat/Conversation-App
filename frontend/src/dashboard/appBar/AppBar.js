@@ -6,15 +6,10 @@ import { connect } from "react-redux";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const MainContainer = styled("div")({
-  // position: "absolute",
-  // right: "0",
-  // top: "0",
   height: "48px",
-  // borderBottom: "1px solid black",
   backgroundColor: "#081D34",
   borderBottom: "3px solid #2462a6",
   boxShadow: "0 3px rgb(36 98 166 / 63%);",
-  // width: "calc(100% - 102px)",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -24,11 +19,12 @@ const MainContainer = styled("div")({
 
 const ProfileWrap = styled("div")({
   display: "flex",
-  alignItems: "center"
+  alignItems: "center",
+  cursor: "pointer"
 })
 
 
-const AppBar = ({ name }) => {
+const AppBar = ({ username, profileImg }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleOpenAddFriendDialog = () => {
@@ -46,14 +42,15 @@ const AppBar = ({ name }) => {
           width: "40px",
           height: "40px",
           borderRadius: "50%",
-          background: "url('images/default-profile-img.jpg') center center",
+          background: `url("upload/${profileImg ? profileImg : 'default-profile-img.png'}")`,
           backgroundSize: "cover",
+          backgroundPosition: "center center",
           marginRight: "10px"
         }}></div>
 
         <div>
           <span style={{ display: "block", color: "#fff" }}>
-            Rohim
+            {username}
             {/* {name[0].toUpperCase() + name.slice(1)} */}
           </span>
           <span style={{ display: "inline-block", color: "green" }}>active</span>
@@ -71,9 +68,9 @@ const AppBar = ({ name }) => {
   );
 };
 
-const mapStoreStateToProps = ({ userDetails }) => {
+const mapStoreStateToProps = ({ auth }) => {
   return {
-    name: userDetails?.username
+    ...auth.userDetails
   }
 }
 

@@ -29,6 +29,7 @@ exports.login = async (req, res, next) => {
           mail: user.mail,
           token: token,
           username: user.username,
+          profileImg: user.profileImg,
           _id: user._id
         },
         message: "User register success"

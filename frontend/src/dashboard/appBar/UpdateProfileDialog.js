@@ -35,10 +35,17 @@ const Input = styled("input")({
 
 const UpdateProfileDialog = ({
   isDialogOpen,
-  closeDialogHandler
+  closeDialogHandler,
+  updateUserName,
+  updateProfileImage,
+  userDetails
 }) => {
   const [username, setUsername] = useState("");
   const [editEnable, setEditEnable] = useState(false);
+
+  useEffect(() => {
+    setUsername(userDetails?.username)
+  }, [userDetails?.username])
 
   const handleCloseDialog = () => {
     closeDialogHandler();
@@ -52,15 +59,25 @@ const UpdateProfileDialog = ({
     setUsername(event.target.value)
   }
 
-  const updateUserName = () => {
+  //update onBlur
+  const updateName = async () => {
     userNameEditToggle()
     if (username) {
+      await updateUserName({ userId: userDetails._id, username })
     }
-    console.log("changed");
+  }
+  //update onKeyDown
+  const handleKeyPressed = (event) => {
+    if (event.key === "Enter") {
+      updateName()
+    }
   }
 
-  const updateUserProfileImg = () => {
-    console.log("changed");
+  const updateUserProfileImg = async (event) => {
+    const formData = new FormData();
+    formData.append("userId", userDetails._id)
+    formData.append("profileImg",event.target.files[0])
+    await updateProfileImage(formData)
   }
 
   return (
@@ -82,27 +99,29 @@ const UpdateProfileDialog = ({
               width: "150px",
               height: "150px",
               borderRadius: "50%",
-              background: "url('images/default-profile-img.jpg') center center",
-              backgroundSize: "cover"
+              background: `url("upload/${userDetails.profileImg ? userDetails.profileImg : 'default-profile-img.png'}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center"
             }}></div>
 
             <EditIcon className="profileImgEditIcon" sx={{ display: "none", position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", backgroundColor: "#fff", borderRadius: "50%", padding: "10px" }} />
             <input onChange={updateUserProfileImg} type="file" style={{ display: "none" }} />
           </label>
         </DialogTitle>
-        <DialogContent sx={{ bgcolor: "#0F1925"}}>
+        <DialogContent sx={{ bgcolor: "#0F1925" }}>
           <UserNameEditWrap>
             {
               editEnable ?
                 <Input
-                  value={"Rohim"}
+                  value={username}
                   onChange={handleValueChange}
-                  type={"text"}
-                  placeholder={"placeholder"}
-                  onBlur={updateUserName}
+                  type="text"
+                  placeholder="Please type your name"
+                  onBlur={updateName}
+                  onKeyDown={handleKeyPressed}
                   autoFocus
                 /> :
-                <Typography sx={{ fontSize: "16", color: "#fff" }}>Rohim </Typography>
+                <Typography sx={{ fontSize: "16", color: "#fff" }}>{username}</Typography>
             }
             {!editEnable && <EditIcon onClick={userNameEditToggle} sx={{ fontSize: "16", color: "#fff", marginLeft: "10px" }} />}
           </UserNameEditWrap>
@@ -112,10 +131,16 @@ const UpdateProfileDialog = ({
   );
 };
 
+const mapStoreStateToProps = ({ auth }) => {
+  return {
+    ...auth
+  }
+}
+
 const mapActionsToProps = (dispatch) => {
   return {
     ...getActions(dispatch)
   }
 }
 
-export default connect(null, mapActionsToProps)(UpdateProfileDialog);
+export default connect(mapStoreStateToProps, mapActionsToProps)(UpdateProfileDialog);

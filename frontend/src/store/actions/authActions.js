@@ -12,6 +12,12 @@ export const getActions = (dispatch) => {
     register: (userDetails, navigate) =>
       dispatch(register(userDetails, navigate)),
     setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
+    updateUserName: (data) => {
+      dispatch(updateUserName(data))
+    },
+    updateProfileImage: (formData) => {
+      dispatch(updateProfileImage(formData))
+    }
   };
 };
 
@@ -66,3 +72,35 @@ const register = (userDetails, navigate) => {
     }
   };
 };
+
+const updateUserName = (data) => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    const response = await api.updateName(data);
+    console.log(response);
+    dispatch(setLoading(false));
+
+    if (response.error) {
+      const errMessage = response?.exception?.response?.data
+      dispatch(openAlertMessage(errMessage ? errMessage : 'Internal server error'))
+    } else {
+      const { userDetails } = response?.data;
+      dispatch(setUserDetails(userDetails));
+    }
+  }
+}
+
+const updateProfileImage = (formData) => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    const response = await api.updateProfileImage(formData);
+    dispatch(setLoading(false));
+    if (response.error) {
+      const errMessage = response?.exception?.response?.data
+      dispatch(openAlertMessage(errMessage ? errMessage : 'Internal server error'))
+    } else {
+      const { userDetails } = response?.data;
+      dispatch(setUserDetails(userDetails));
+    }
+  }
+}

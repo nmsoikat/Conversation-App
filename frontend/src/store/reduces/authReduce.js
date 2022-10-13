@@ -10,7 +10,10 @@ const reducer = (state = initState, action) => {
     case authActions.SET_USER_DETAILS:
       return {
         ...state,
-        userDetails: action.userDetails,
+        userDetails: {
+          ...state.userDetails,
+          ...action.userDetails
+        }
       };
     case authActions.SET_LOADING:
       return {

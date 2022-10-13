@@ -12,6 +12,7 @@ const socketServer = require('./socketServer')
 
 const authRoutes = require("./routes/authRoutes")
 const friendsInvitationRoutes = require("./routes/friendsInvitationRoutes")
+const userRoutes = require("./routes/userRoutes")
 
 
 /**
@@ -28,6 +29,7 @@ app.use(cors())
 //register routes
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/friend-invitation", friendsInvitationRoutes)
+app.use("/api/v1/user", userRoutes)
 
 const server = http.createServer(app)
 socketServer.registerSocketServer(server)

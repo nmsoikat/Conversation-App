@@ -91,6 +91,30 @@ export const rejectFriendInvitation = async (data) => {
   }
 }
 
+export const updateName = async (data) => {
+  try {
+    return await apiClient.put('/user/update-username', data)
+  } catch (exception) {
+    checkResponseCode(exception)
+    return {
+      error: true,
+      exception,
+    };
+  }
+}
+
+export const updateProfileImage = async (formData) => {
+  try {
+    return await apiClient.put('/user/update/profile-img', formData)
+  } catch (exception) {
+    checkResponseCode(exception)
+    return {
+      error: true,
+      exception,
+    };
+  }
+}
+
 const checkResponseCode = (exception) => {
   const responseCode = exception?.response?.status;
 
