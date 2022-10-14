@@ -33,6 +33,7 @@ const Messages = ({ chosenChatDetails, messages, newMessageRef}) => {
   //console.log("messages:");
   //console.log(messages);
   // console.log({chosenChatDetails});
+  // console.log({messages});
   return (
     <MainContainer>
       <MessagesHeader username={chosenChatDetails?.username} profileImg={chosenChatDetails?.profileImg} />
@@ -62,13 +63,14 @@ const Messages = ({ chosenChatDetails, messages, newMessageRef}) => {
             )}
             <Message
               content={message.content}
-              username={message.author.username}
-              profileImg={chosenChatDetails?.profileImg}
+              author={message.author}
+              chosenChatDetails={chosenChatDetails}
               sameAuthor={sameAuthor}
-              date={convertDateToHumanReadable(
-                new Date(message.date),
-                "dd/mm/yy"
-              )}
+              // date={convertDateToHumanReadable(
+              //   new Date(message.date),
+              //   "dd/mm/yy"
+              // )}
+              date={message.date}
               sameDay={sameDay}
               newMessageRef={newMessageRef}
             />
