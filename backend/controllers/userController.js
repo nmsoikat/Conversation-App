@@ -25,7 +25,9 @@ exports.updateUserProfileImage = async (req, res, next) => {
   try {
     const { userId } = req.body;
     const file = req.file
-
+    if(!file){
+      return res.status(400).send("Image upload fail")
+    }
     const oldUser = await User.findByIdAndUpdate(userId, { profileImg: file.filename }) //update and return old data
     const updatedUser = await User.findById(userId)
 
