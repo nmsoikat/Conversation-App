@@ -24,7 +24,7 @@ const PORT = process.env.PORT || process.env.API_PORT
 const app = express()
 app.use(express.json())
 app.use(cors())
-
+app.use(express.static('public'))
 
 //register routes
 app.use("/api/v1/auth", authRoutes)
