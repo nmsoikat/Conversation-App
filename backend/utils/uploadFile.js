@@ -23,7 +23,7 @@ const upload = multer({
   // dest: DESTINATION_PATH,
   storage: storage,
   limits: {
-    fileSize: 8 * (1024 * 1024),
+    fileSize: 8 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
     if (file.fieldname === "profileImg") {

@@ -31,6 +31,14 @@ app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/friend-invitation", friendsInvitationRoutes)
 app.use("/api/v1/user", userRoutes)
 
+app.use((err, req, res, next) => {
+  if (err.name === "MulterError") {
+    return res.status(400).send("Profile image upload failed. " + err.message)
+  }
+
+  return res.status(400).send("Something went very wrong!")
+})
+
 const server = http.createServer(app)
 socketServer.registerSocketServer(server)
 
