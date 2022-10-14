@@ -11,7 +11,7 @@ import VideoGridViewButton from "./VideoGridViewButton";
 const MainContainer = styled("div")({
   height: "60px",
   width: "100%",
-  backgroundColor: "#E94B3CFF",
+  backgroundColor: "#578CFE",
   borderTopLeftRadius: "8px",
   borderTopRightRadius: "8px",
   display: "flex",

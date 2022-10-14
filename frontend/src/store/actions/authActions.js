@@ -100,7 +100,7 @@ const updateProfileImage = (formData) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     const response = await api.updateProfileImage(formData);
-    console.log(response);
+    // console.log(response);
     dispatch(setLoading(false));
     if (response.error) {
       const errMessage = response?.exception?.response?.data

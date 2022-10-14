@@ -21,6 +21,7 @@ const PendingInvitationsList = ({ pendingFriendsInvitations }) => {
           id={invitation._id}
           username={invitation.senderId.username}
           mail={invitation.senderId.mail}
+          profileImg={invitation.senderId.profileImg}
         />
       ))}
     </MainContainer>

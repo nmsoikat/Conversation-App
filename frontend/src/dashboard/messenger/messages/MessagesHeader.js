@@ -18,26 +18,20 @@ const StartConversationAvatar = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "20px",
-  fontWeight: "700",
 });
 
-const MessagesHeader = ({ name = "" }) => {
+const MessagesHeader = ({ username = "", profileImg = "" }) => {
+  const style = {
+    borderRadius: "50%",
+    backgroundImage: `url("upload/${profileImg ? profileImg : 'default-profile-img.png'}")`,
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+  }
+
   return (
     <MainContainer>
-      <StartConversationAvatar>{name.substring(0, 2)}</StartConversationAvatar>
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: "bold",
-          color: "#081D34",
-          marginLeft: "5px",
-          marginRight: "5px",
-          textAlign: "center"
-        }}
-      >
-        {name[0].toUpperCase() + name.slice(1)}
-      </Typography>
+      <StartConversationAvatar sx={style}/>
+
       <Typography
         sx={{
           color: "#081D34",
@@ -46,7 +40,7 @@ const MessagesHeader = ({ name = "" }) => {
           textAlign: "center"
         }}
       >
-        This is the beginning of your conversation with {name}
+        This is the beginning of your conversation with {username && username[0].toUpperCase() + username.slice(1)}
       </Typography>
     </MainContainer>
   );

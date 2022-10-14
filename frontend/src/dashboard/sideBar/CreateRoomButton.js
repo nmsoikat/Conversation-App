@@ -24,7 +24,7 @@ const CreateRoomButton = ({ isUserInRoom }) => {
         minWidth: 0,
         marginTop: "10px",
         color: "white",
-        backgroundColor: "#E94B3CFF",
+        backgroundColor: "#578CFE",
       }}
     >
       <VideoCallIcon />

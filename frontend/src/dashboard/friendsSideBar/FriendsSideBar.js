@@ -13,6 +13,7 @@ const MainContainer = styled("div")({
   flexDirection: "column",
   alignItems: "center",
   backgroundColor: "#fff",
+  borderRight: "1px solid #ddd",
   position: "absolute",
   left: "74px",
   zIndex: "2"

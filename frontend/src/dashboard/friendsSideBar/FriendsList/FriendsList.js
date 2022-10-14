@@ -13,7 +13,7 @@ const checkOnlineUser = (friends = [], onlineUsers = []) => {
   friends.forEach(friend => {
     friend.isOnline = onlineUsers.find((user) => user.userId === friend.id) ? true : false
   })
-
+  
   return friends
 }
 
@@ -23,6 +23,7 @@ const FriendsList = ({ friends, onlineUsers }) => {
       {checkOnlineUser(friends, onlineUsers).map((f) => (
         <FriendsListItem
           username={f.username}
+          profileImg={f.profileImg}
           id={f.id}
           key={f.id}
           isOnline={f.isOnline}

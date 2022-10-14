@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { styled } from "@mui/system";
 import Avatar from "../../../shared/components/Avatar";
 import Typography from "@mui/material/Typography";
+import { connect } from "react-redux"
 
 const MainContainer = styled("div")({
   width: "100%",
@@ -17,9 +18,9 @@ const AvatarContainer = styled("div")({
 const MessageContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
-  backgroundColor: "rgb(177 204 234)",
+  backgroundColor: "#0046ff36",
   width: "100%",
-  borderRadius: "5px",
+  borderRadius: "0px",
   marginBottom: "5px",
 });
 
@@ -32,7 +33,7 @@ const SameAuthorMessageContent = styled("div")({
   marginLeft: "55px",
   color: "#222",
   padding: "8px",
-  backgroundColor: "rgb(177 204 234)",
+  backgroundColor: "#EDF0F8",
   width: "95%",
   width: "calc(100% - 70px)",
   borderRadius: "5px",
@@ -43,7 +44,8 @@ const SameAuthorMessageText = styled("span")({
   // marginLeft: "70px",
 });
 
-const Message = ({ content, sameAuthor, username, date, sameDay, newMessageRef }) => {
+//userDetails is login user
+const Message = ({ content, sameAuthor, username, date, sameDay, newMessageRef, userDetails, profileImg }) => {
   // //get ref of new message element 
   //// const newMessageRef = useRef();
   //// scroll to new message 
@@ -65,12 +67,12 @@ const Message = ({ content, sameAuthor, username, date, sameDay, newMessageRef }
     // ref={newMessageRef}
     <MainContainer ref={newMessageRef}>
       <AvatarContainer>
-        <Avatar username={username} />
+        <Avatar username={username} profileImg={sameAuthor ? userDetails?.profileImg : profileImg} />
       </AvatarContainer>
-      <MessageContainer style={{ backgroundColor: username === "rohim" ? "rgb(218 228 239)" : "rgb(177 204 234)" }}>
+      <MessageContainer style={{ backgroundColor: sameAuthor ? "#EDF0F8" : "#0046ff36" }}>
         <Typography style={{ fontSize: "16px", marginTop: "-20px", color: "#333" }}>
-          {username[0].toUpperCase() + username.slice(1)}
-          {/* <span style={{ fontSize: "12px", color: "#ddd" }}>{date}</span> */}
+          {username && username[0].toUpperCase() + username.slice(1)}
+          {/* <span style={{ fontSize: "12px", color: "#333" }}>{date}</span> */}
         </Typography>
         <MessageContent>{content}</MessageContent>
       </MessageContainer>
@@ -78,4 +80,10 @@ const Message = ({ content, sameAuthor, username, date, sameDay, newMessageRef }
   );
 };
 
-export default Message;
+const mapStoreStateToProps = ({ auth }) => {
+  return {
+    ...auth
+  }
+}
+
+export default connect(mapStoreStateToProps, null)(Message);

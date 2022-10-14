@@ -50,8 +50,7 @@ const AppBar = ({ username, profileImg }) => {
 
         <div>
           <span style={{ display: "block", color: "#fff" }}>
-            {username}
-            {/* {name[0].toUpperCase() + name.slice(1)} */}
+            {username && username[0].toUpperCase() + username.slice(1)}
           </span>
           <span style={{ display: "inline-block", color: "green" }}>active</span>
         </div>

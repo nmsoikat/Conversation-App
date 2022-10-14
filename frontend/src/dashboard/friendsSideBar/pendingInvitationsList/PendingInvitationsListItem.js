@@ -9,6 +9,7 @@ const PendingInvitationsListItem = ({
   id,
   username,
   mail,
+  profileImg,
   acceptFriendInvitation = () => { },
   rejectFriendInvitation = () => { },
 }) => {
@@ -37,7 +38,7 @@ const PendingInvitationsListItem = ({
             justifyContent: "space-between",
           }}
         >
-          <Avatar username={username} />
+          <Avatar username={username} profileImg={profileImg} />
           <Typography
             sx={{
               marginLeft: "7px",
@@ -47,7 +48,7 @@ const PendingInvitationsListItem = ({
             }}
             variant="subtitle1"
           >
-            {username}
+            {username && username[0].toUpperCase() + username.slice(1)}
           </Typography>
           <InvitationDecisionButtons
             disabled={buttonsDisabled}

@@ -32,9 +32,10 @@ const convertDateToHumanReadable = (date, format) => {
 const Messages = ({ chosenChatDetails, messages, newMessageRef}) => {
   //console.log("messages:");
   //console.log(messages);
+  // console.log({chosenChatDetails});
   return (
     <MainContainer>
-      <MessagesHeader name={chosenChatDetails?.username} />
+      <MessagesHeader username={chosenChatDetails?.username} profileImg={chosenChatDetails?.profileImg} />
       
       {messages.map((message, index) => {
         const sameAuthor =
@@ -62,6 +63,7 @@ const Messages = ({ chosenChatDetails, messages, newMessageRef}) => {
             <Message
               content={message.content}
               username={message.author.username}
+              profileImg={chosenChatDetails?.profileImg}
               sameAuthor={sameAuthor}
               date={convertDateToHumanReadable(
                 new Date(message.date),

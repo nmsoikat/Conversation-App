@@ -17,7 +17,7 @@ const InviteButtonWrap = styled("div")({
 const InviteButton = styled("div")({
   width: "60px",
   height: "30px",
-  backgroundColor: "#2D6BE6",
+  backgroundColor: "#578CFE",
   textAlign: "center",
   color: "#fff",
   borderRadius: "10px",

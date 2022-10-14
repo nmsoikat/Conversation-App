@@ -9,7 +9,7 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
     populate: {
       path: 'author',
       model: 'User',
-      select: 'username _id'
+      select: '_id username profileImg'
     }
   })
 
@@ -23,6 +23,7 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
         participants: conversation.participants
       })
     }
+    // console.log(conversation);
 
     /**
      * check if users of this conversation are online
@@ -33,6 +34,7 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
       //active devices of this users //user may have multiple device logged in using same account
       const activeConnections = socketServerStore.getActiveConnections(userId.toString())
 
+      // console.log({activeConnections});
       activeConnections.forEach(socketId => {
         io.to(socketId).emit("direct-chat-history", {
           messages: conversation.messages,

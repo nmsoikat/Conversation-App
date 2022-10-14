@@ -20,8 +20,7 @@ const MainPageButton = ({ isFriendsBarVisible, toggleFriendsBar }) => {
         minWidth: 0,
         marginTop: "10px",
         color: "white",
-        backgroundColor: (!isFriendsBarVisible ? '#E94B3CFF': '#5865F2'),
-        // backgroundColor: "#5865F2",
+        backgroundColor: (!isFriendsBarVisible ? '#578CFE': '#5865F2'),
       }}
       onClick={friendsBarToggler}
     >
