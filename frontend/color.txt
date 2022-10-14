@@ -1,0 +1,13 @@
+//app-bar-bg1:#166E47
+//message-container-bg1:#FAFAFA
+
+login-text:#249FBA
+login-bg:#0F1925
+
+app-bar-bg2:#081D34
+//welcome-message-bg:#EDF0F8
+sender-message-bg:#EDF0F8
+receiver-message-bg:#0046ff36
+icon-color: #578CFE
+icon-color-active: #5865F2
+old-icon-color: #E94B3CFF
