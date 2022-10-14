@@ -12,14 +12,15 @@ import RegisterPage from './authPages/registerPage/RegisterPage';
 import AlertNotification from "./shared/components/AlertNotification";
 
 function App() {
+  let localUserDetails = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Navigate replace to="/dashboard" />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={localUserDetails ? <Navigate to="/dashboard" /> : <LoginPage />} />
+          <Route path="/register" element={localUserDetails ? <Navigate to="/dashboard" /> : <RegisterPage />} />
         </Routes>
       </BrowserRouter>
       <AlertNotification />

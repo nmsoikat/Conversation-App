@@ -5,3 +5,9 @@
 .userUpdateDialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   min-width: 400px;
 }
+
+aside.EmojiPickerReact.epr-main {
+  position: absolute !important;
+  bottom: 60px;
+  right: 20%;
+}
