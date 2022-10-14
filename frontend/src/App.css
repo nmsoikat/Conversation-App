@@ -2,7 +2,12 @@
   display: block;
 }
 
-.userUpdateDialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+
+/* .userUpdateDialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  min-width: 400px;
+} */
+/* production  changed className*/
+.userUpdateDialog .MuiPaper-root {
   min-width: 400px;
 }
 
