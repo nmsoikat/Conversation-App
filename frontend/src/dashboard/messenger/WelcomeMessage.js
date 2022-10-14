@@ -17,7 +17,7 @@ const WelcomeMessage = () => {
   return (
     <Wrapper>
       <img src="images/start-conversation-img.png" style={{height: "auto", width: "30%", opacity: "0.8"}}/>
-      <Typography variant="h6" sx={{ color: "#578CFE", marginTop: "30px" }}>
+      <Typography variant="h6" sx={{ color: "#578CFE", marginTop: "30px", fontSize: "14px", textAlign:"center" }}>
         Choose conversation to start messaging!
       </Typography>
     </Wrapper>
