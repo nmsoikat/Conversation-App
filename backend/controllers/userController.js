@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const fs = require('fs')
 const path = require("path")
+const { DESTINATION_PATH } = require('../utils/uploadFile')
 
 exports.updateUsername = async (req, res, next) => {
   try {
@@ -34,7 +35,7 @@ exports.updateUserProfileImage = async (req, res, next) => {
     //remove old image file in async way
     if (oldUser.profileImg) {
       await new Promise((resolve, reject) => {
-        fs.unlink(path.resolve('../frontend/public/upload', oldUser.profileImg), (err) => {
+        fs.unlink(path.resolve(DESTINATION_PATH, oldUser.profileImg), (err) => {
           if (err) {
             reject("old image is not deleted")
           }

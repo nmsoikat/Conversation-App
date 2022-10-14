@@ -18,7 +18,7 @@ const AvatarPreview = styled("div")({
 const Avatar = ({ username, large, profileImg }) => {
   const style = {
     borderRadius: "50%",
-    backgroundImage: `url("upload/${profileImg ? profileImg : 'default-profile-img.png'}")`,
+    backgroundImage: `url("${profileImg ? process.env.REACT_APP_API_IMAGE_URL + '/' + profileImg : 'images/default-profile-img.png'}")`,
     backgroundSize: "cover",
     backgroundPosition: "center center",
   }

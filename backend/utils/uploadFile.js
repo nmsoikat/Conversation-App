@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 
-const DESTINATION_PATH = "../frontend/public/upload/";
+const DESTINATION_PATH = "./public/upload";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -23,7 +23,7 @@ const upload = multer({
   // dest: DESTINATION_PATH,
   storage: storage,
   limits: {
-    fileSize: 2 * (1024 * 1024),
+    fileSize: 8 * (1024 * 1024),
   },
   fileFilter: (req, file, cb) => {
     if (file.fieldname === "profileImg") {
@@ -38,5 +38,6 @@ const upload = multer({
 });
 
 module.exports = {
-  upload
+  upload,
+  DESTINATION_PATH
 }
