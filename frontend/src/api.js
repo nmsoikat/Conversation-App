@@ -1,14 +1,8 @@
 import axios from "axios";
 import { logout } from "./shared/utils/auth";
 
-//localhost
-// const apiClient = axios.create({
-//   baseURL: "http://localhost:5001/api/v1",
-//   timeout: 1000,
-// });
-
 const apiClient = axios.create({
-  baseURL: "https://conversation-app-be.onrender.com/api/v1"
+  baseURL: process.env.REACT_APP_API_URL
 });
 
 //host local ipv4

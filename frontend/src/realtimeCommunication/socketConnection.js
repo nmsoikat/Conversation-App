@@ -9,15 +9,7 @@ let socket = null;
 export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
 
-  //localhost
-  // socket = io('http://localhost:5001', {
-  //   auth: {
-  //     token: jwtToken
-  //   }
-  // })
-
-  //live
-  socket = io('https://conversation-app-be.onrender.com', {
+  socket = io(process.env.REACT_APP_API_URL, {
     auth: {
       token: jwtToken
     }
