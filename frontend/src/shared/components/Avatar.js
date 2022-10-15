@@ -13,14 +13,18 @@ const AvatarPreview = styled("div")({
   fontWeight: "700",
   marginLeft: "5px",
   color: "white",
+  flexShrink: 0
 });
 
-const Avatar = ({ username, large, profileImg }) => {
+const Avatar = ({ username, large, isMeetingRoom, profileImg }) => {
   const style = {
     borderRadius: "50%",
-    backgroundImage: `url("${profileImg ? process.env.REACT_APP_API_IMAGE_URL + '/' + profileImg : 'images/default-profile-img.png'}")`,
     backgroundSize: "cover",
     backgroundPosition: "center center",
+  }
+
+  if (!isMeetingRoom) {
+    style.backgroundImage = `url("${profileImg ? process.env.REACT_APP_API_IMAGE_URL + '/' + profileImg : 'images/default-profile-img.png'}")`
   }
 
   if (large) {
@@ -31,7 +35,7 @@ const Avatar = ({ username, large, profileImg }) => {
 
   return (
     <AvatarPreview style={style}>
-        {/* username?.substring(0, 2) */}
+      {isMeetingRoom && username?.substring(0, 2)}
     </AvatarPreview>
   );
 };

@@ -37,7 +37,7 @@ const ActiveRoomButton = ({
           disabled={activeRoomButtonDisabled || isUserInRoom}
           onClick={handleJoinActiveRoom}
         >
-          <Avatar username={creatorUsername} />
+          <Avatar username={creatorUsername} isMeetingRoom={true}/>
         </Button>
       </div>
     </Tooltip>
