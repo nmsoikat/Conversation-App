@@ -26,7 +26,7 @@ const fullScreenRoomStyle = {
 const minimizedRoomStyle = {
   bottom: "0px",
   right: "0px",
-  width: "60%",
+  width: "65%",
   height: "40vh",
 };
 
