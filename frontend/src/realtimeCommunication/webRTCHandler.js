@@ -4,11 +4,11 @@ import Peer from 'simple-peer'
 import * as socketConnection from './socketConnection'
 
 const getConfiguration = () => {
-  // const turnIceServer = null;
-  const turnIceServer = true;
+  const turnIceServer = null;
+  // const turnIceServer = true;
 
   if (turnIceServer) {
-    //TODO: user TURN server credential
+    //TODO: user TURN server credential //create own TURN server (AWS EC2)
     //   const iceConfiguration = {
     //     iceServers: [
     //         {
@@ -21,15 +21,15 @@ const getConfiguration = () => {
 
     // const peerConnection = new RTCPeerConnection(iceConfiguration);
 
-    return {
-      iceServers: [
-        {
-          urls: 'turn:turn.anyfirewall.com:443?transport=tcp',
-          username: 'webrtc',
-          credentials: 'webrtc'
-        }
-      ]
-    }
+    // return {
+    //   iceServers: [
+    //     {
+    //       urls: 'turn:turn.anyfirewall.com:443?transport=tcp',
+    //       username: 'webrtc',
+    //       credentials: 'webrtc'
+    //     }
+    //   ]
+    // }
   } else {
     //in local environment we have not access to the TURN server
     console.warn("Using only STUN server")
