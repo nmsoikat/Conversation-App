@@ -54,6 +54,7 @@ JWT_SECRET=
 
 ![Provide some information to create new account](new-user.jpg)
 
+[Back to top](#features)
 
 ## Login
 
