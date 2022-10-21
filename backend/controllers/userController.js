@@ -37,13 +37,21 @@ exports.updateUserProfileImage = async (req, res, next) => {
     //remove old image file in async way
     if (oldUser.profileImg) {
       await new Promise((resolve, reject) => {
-        fs.unlink(path.resolve(DESTINATION_PATH, oldUser.profileImg), (err) => {
-          if (err) {
-            reject("old image is not deleted")
+        try {
+          if(fs.existsSync(path.resolve(DESTINATION_PATH, oldUser.profileImg))){
+            fs.unlink(path.resolve(DESTINATION_PATH, oldUser.profileImg), (err) => {
+              if (err) {
+                reject("old image is not deleted")
+              }
+    
+              resolve("old image is deleted")
+            })
           }
 
-          resolve("old image is deleted")
-        })
+          resolve("old image is not found")
+        } catch (error) {
+          console.log(error)
+        }
       })
     }
 
