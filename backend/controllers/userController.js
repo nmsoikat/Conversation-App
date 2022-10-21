@@ -35,25 +35,18 @@ exports.updateUserProfileImage = async (req, res, next) => {
     //console.log(path.resolve('../frontend/public/upload', file.filename)); -> C:\...\...\...\Conversation-App\frontend\public\upload\5-1665692524428.jpg
     //console.log(path.join('frontend', 'public', 'upload', file.filename)); -> frontend\public\upload\3-1665692379777.jpg
     //remove old image file in async way
-    if (oldUser.profileImg) {
-      await new Promise((resolve, reject) => {
-        try {
-          if(fs.existsSync(path.resolve(DESTINATION_PATH, oldUser.profileImg))){
-            fs.unlink(path.resolve(DESTINATION_PATH, oldUser.profileImg), (err) => {
-              if (err) {
-                reject("old image is not deleted")
-              }
-    
-              resolve("old image is deleted")
-            })
-          }
+    // if (oldUser.profileImg) {
+    //   await new Promise((resolve, reject) => {
+    //     fs.unlink(path.resolve(DESTINATION_PATH, oldUser.profileImg), (err) => {
+    //       if (err) {
+    //         console.log(err);
+    //         reject("old image is not deleted")
+    //       }
 
-          resolve("old image is not found")
-        } catch (error) {
-          console.log(error)
-        }
-      })
-    }
+    //       resolve("old image is deleted")
+    //     })
+    //   })
+    // }
 
     return res.status(200).json({
       isSuccess: true,
